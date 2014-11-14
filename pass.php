@@ -77,13 +77,17 @@ class RSA
 
 	public function decrypt ($indata) {
 		//hexadecimal data
+		if (!ctype_xdigit($indata)) {
+			return NULL;
+		}
 		$indata = pack("H*", $indata);
+
 		// Decrypt the data using the private key and store the results in $decrypted
 		if (openssl_private_decrypt($indata, $decrypted, $this->privKey)) {
 			return $decrypted;
 		}
 		else {
-			return "encrypt failed.";
+			return NULL;
 		}
 	}
 }

@@ -28,6 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 	else {
 		$output = $key->decrypt($encrypted);
+		if ($output == NULL) {
+			$output = "decrypt failed";
+		}
 	}
 }
 
@@ -36,9 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-	<script type="text/javascript" src="js/jsbn.js"></script>
+	<script type="text/javascript" src="js/jsbn.js"></script> 
+	<script type="text/javascript" src="js/prng4.js"></script> 
 	<script type="text/javascript" src="js/rng.js"></script>
-	<script type="text/javascript" src="js/prng4.js"></script>
 	<script type="text/javascript" src="js/rsa.js"></script>
 	<script type="text/javascript">
 		
@@ -52,11 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			else {
 				var rsa = new RSAKey();
 				rsa.setPublic(keyn, keye);
-
 				var data = document.getElementById("instr").value;
-
 				var edata = rsa.encrypt(data);
-
 				document.getElementById("instr").value = edata;
 			}
 		}
@@ -74,12 +74,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <p><?php echo $encrypted;?></p>
 <p><?php echo $output;?></p>
 
-<script>
-var x = "Hello World!";              
+<?php
+$stock = "0001.HK";
+$sMonth = 0; //$_GET['sM'] - 1;
+$sDay = 4;//$_GET['sD'];
+$sYear = 2012;//$_GET['sY'];
+$eMonth = 8;//$_GET['eM'] - 1;
+$eDay = 4;//$_GET['eD'];
+$eYear = 2013;//$_GET['eY'];
+$url = "http://ichart.finance.yahoo.com/table.csv?s=$stock&d=$eMonth&e=$eDay&f=$eYear&g=d&a=$sMonth&b=$sDay&c=$sYear&ignore=.csv";
+$url = "http://download.finance.yahoo.com/d/quotes.csv?s=%40%5EDJI,GOOG&f=nsl1op&e=.csv";
 
-document.getElementById("demo").innerHTML =
-typeof x + " " + typeof y;
-</script>
+$raw = file_get_contents($url);
+// Split results, trim way the extra line break at the end
+$quotes = explode("\n",$raw);
+print_r($quotes);
+ 
+
+?>
 
 </body>
 </html>
