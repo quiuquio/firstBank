@@ -12,7 +12,7 @@
             </li>
             <!-- class="active" will keep this LI open by default -->
             <li class="active">
-                <h3><span class="icon-tasks"></span>Paymets</h3>
+                <h3><span></span>Paymets</h3>
                 <ul>
                     <li><a href="#">Make a payment</a></li>
                     <li><a href="#">Urgent</a></li>
@@ -22,6 +22,20 @@
                 </ul>
             </li>
             <li>
+                <h3><span></span>Financial Tools</h3>
+                <ul>
+                    <li><a href="#">Market Tracker</a></li>
+                    <li><a href="#">Current Prices</a></li>
+                </ul>
+            </li>
+            <li>
+                <h3><span></span>Loans</h3>
+                <ul>
+                    <li><a href="#">What here?</a></li>
+                    <li><a href="#">And here? No idea :D</a></li>
+                </ul>
+            </li>
+            <!--<li>
                 <h3><span class="icon-calendar"></span>Calendar</h3>
                 <ul>
                     <li><a href="#">Current Month</a></li>
@@ -34,8 +48,8 @@
                     <li><a href="#">Private Calendar</a></li>
                     <li><a href="#">Settings</a></li>
                 </ul>
-            </li>
-            <li>
+            </li>-->
+            <!--<li>
                 <h3><span class="icon-heart"></span>Favourites</h3>
                 <ul>
                     <li><a href="#">Global favs</a></li>
@@ -43,7 +57,7 @@
                     <li><a href="#">Team favs</a></li>
                     <li><a href="#">Settings</a></li>
                 </ul>
-            </li>
+            </li>-->
         </ul>
     </div>
 
@@ -51,7 +65,7 @@
 <script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
 
 <!-- jQuery -->
-<script src="http://thecodeplayer.com/uploads/js/jquery-1.7.1.min.js" type="text/javascript"></script>    
+<!--<script src="http://thecodeplayer.com/uploads/js/jquery-1.7.1.min.js" type="text/javascript"></script>-->    
 
 <script type="text/javascript">
     $(document).ready(function(){

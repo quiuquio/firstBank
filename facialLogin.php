@@ -3,7 +3,7 @@
 <div style="text-align:center; display:block">
     <video id="video" width="640" height="480" autoplay></video>
     <button id="snap" class="sexyButton">Snap Photo</button>
-    <input id="userName" type="text" name="username" value="<?php echo $_SESSION['user_name']?>" hidden>
+    <input id="userName" type="text" name="username" value="<?php echo $_POST['user_name']?>" hidden>
     <input id="userLabel"type="text" name="label" value="bank user" hidden>
     <canvas id="canvas" width="640" height="480" hidden></canvas>
 </div>
@@ -17,8 +17,6 @@
         // Put event listeners into place
         window.addEventListener("DOMContentLoaded", function() {
             // Grab elements, create settings, etc.
-            
-            $(document).ajaxStop($.unblockUI);
 
             var canvas = document.getElementById("canvas"),
                 context = canvas.getContext("2d"),
@@ -98,7 +96,7 @@
                           
                         }
                 });
-            $.blockUI({ message: $('#domMessage') });
+            $.msg({ autoUnblock:false, content: $('#domMessage').html() });
         }
 
         function trainFacialRecognition(imgArray, usr){
@@ -145,6 +143,10 @@
                     }
                 }
             );
+        }
+
+        function loginSucces(){
+            
         }
 
         function parseHelp(ob){
