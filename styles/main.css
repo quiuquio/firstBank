@@ -3,7 +3,7 @@
 /*Basic reset*/
 * {margin: 0; padding: 0;}
 
-body {
+/*body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
     font-size: 13px;
     color:#333
@@ -59,11 +59,73 @@ footer {
     clear: both;
     position:absolute;
     bottom:0px;
+}*/
+
+@import url("reset.css");
+
+body {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    color:#333
 }
+
+p {
+    padding: 10px;
+}
+
+#wrapper {
+    width: 100%;
+    min-width: 800px;
+    max-width: 2000px;
+    margin: 0 auto;
+}
+
+header {
+    float: left;
+    height: 15%;
+    width: 100%;
+    background: #FF6633;
+}
+
+#content, main {
+    float: left;
+    width: 70%;
+    height: 75%;
+}
+
+#content {
+    background: #FFFFFF;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+#leftcolumn {
+    background: #33CCFF;
+    width: 15%;
+    height: 75%;
+    float: left;
+}
+
+#rightcolumn {
+    background: #CC33FF;
+    width: 15%;
+    height: 75%;
+    float: left;
+}
+
+footer {
+    height: 10%;
+    width: 100%;
+    background: #33FF66;
+    clear: both;
+}
+
+
+
 
 #accordian {
     background: #004050;
-    width: inherit;
+    width: 100%;
     margin: 100px auto 0 auto;
     color: white;
     /*Some cool shadow and glow effect*/

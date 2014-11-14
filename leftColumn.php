@@ -2,19 +2,19 @@
         <div id="accordian">
         <ul>
             <li>
-                <h3><span class="icon-dashboard"></span>Dashboard</h3>
+                <h3><span class="icon-dashboard"></span>Account</h3>
                 <ul>
-                    <li><a href="#">Reports</a></li>
-                    <li><a href="#">Search</a></li>
-                    <li><a href="#">Graphs</a></li>
-                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">List Transactions</a></li>
+                    <li><a href="#">Saving account</a></li>
+                    <li><a href="#">Bill payment</a></li>
+                    <li><a href="#">Electronic Transfer</a></li>
                 </ul>
             </li>
-            <!-- we will keep this LI open by default -->
+            <!-- class="active" will keep this LI open by default -->
             <li class="active">
-                <h3><span class="icon-tasks"></span>Tasks</h3>
+                <h3><span class="icon-tasks"></span>Paymets</h3>
                 <ul>
-                    <li><a href="#">Today's tasks</a></li>
+                    <li><a href="#">Make a payment</a></li>
                     <li><a href="#">Urgent</a></li>
                     <li><a href="#">Overdues</a></li>
                     <li><a href="#">Recurring</a></li>
