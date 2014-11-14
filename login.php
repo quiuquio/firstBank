@@ -8,8 +8,8 @@ if(isset($_POST['user_name']) && !empty($_POST['user_name'])){
 
 
 if(isset($_SESSION['user_name']) && !empty($_SESSION['user_name'])){
-    var_dump($_SESSION);
-    var_dump($_POST);
+    //var_dump($_SESSION);
+    //var_dump($_POST);
     $p->showPageLoginForm2();
 }
 else{
@@ -38,6 +38,8 @@ class LoginPage{
         echo '<input id="login_input_password" type="password" name="user_password" required /> ';
         echo '<input type="submit"  name="login" value="Log in" />';
         echo '</form>';
+        echo '<h2>Or try the facial recognition Login</h2>';
+        require('facialLogin.php');
     }
 
 }
