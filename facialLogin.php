@@ -1,18 +1,23 @@
 <main>
 <script type="text/javascript" src="js/FCClientJS.js"></script>
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <div style="text-align:center; display:block">
     <video id="video" width="640" height="480" autoplay></video>
     <button id="snap" class="sexyButton">Snap Photo</button>
-    <input id="userName" type="text" name="username" value="<?php echo $_SESSION['user_name']?>" hidden>
+    <input id="userName" type="text" name="username" value="<?php echo $_POST['user_name']?>" hidden>
     <input id="userLabel"type="text" name="label" value="bank user" hidden>
     <canvas id="canvas" width="640" height="480" hidden></canvas>
 </div>
 <div id="trainingResult"></div>
+
+<div id="domMessage" style="display:none;"> 
+    <h1>We are processing your request.  Please be patient.</h1> 
+</div>
+
     <script>
         // Put event listeners into place
         window.addEventListener("DOMContentLoaded", function() {
             // Grab elements, create settings, etc.
+
             var canvas = document.getElementById("canvas"),
                 context = canvas.getContext("2d"),
                 video = document.getElementById("video"),
@@ -44,7 +49,8 @@
                 context.drawImage(video, 0, 0, 640, 480);
                 var dataUrl = canvas.toDataURL('image/jpeg', 1.0);
                 var usr = {name: $("#userName").val(), label: $("#userLabel").val()};
-                trainFacialRecognition([dataURItoBlob(dataUrl)], usr);
+                //trainFacialRecognition([dataURItoBlob(dataUrl)], usr);
+                login(dataUrl, usr);
             });
 
         }, false);
@@ -65,10 +71,36 @@
             return new Blob([new Uint8Array(array)], { type: 'image/jpeg' });
         }
 
+        function login(image, usr) {
+            var client = new FCClientJS( apiKey, apiSecret);
+
+            //client.facesRecognize('guido', 'http://farm1.static.flickr.com/41/104498903_bad315cee0.jpg', null, {namespace: "banktestspace"}, callback);
+
+            var blob = dataURItoBlob(image);
+            console.log("files:", blob);
+
+            //the 'file' field must be an array!!! Hurray!
+            client.facesRecognize(usr.name, null, [blob], {namespace: "banktestspace"}, 
+                function(evt){
+                    evt = parseHelp(evt);
+                    console.log(evt);
+                    //User found go ahead and login !
+                        if (evt.photos[0].tags[0].uids.length > 0 && evt.photos[0].tags[0].uids[0].confidence > 40) {
+                            asd = evt;
+                            console.log("Succes!!! data:", evt);
+                            //loginSuccess(evt);
+                        } else {
+                            asd = evt;
+                            console.log("FAIL!!! data:", evt);
+                            //loginFail(evt);
+                          
+                        }
+                });
+            $.msg({ autoUnblock:false, content: $('#domMessage').html() });
+        }
+
         function trainFacialRecognition(imgArray, usr){
             var client = new FCClientJS( apiKey, apiSecret);
-            asd = imgArray;
-            console.log(123, asd);
             client.facesDetect(null, imgArray, {}, 
                 function(evt){
                     evt = parseHelp(evt);
@@ -90,7 +122,7 @@
                                     alert("tagsSave: succes");
                                     client.facesTrain(usr.name+"@banktestspace", null, 
                                         function(evt){
-                                            alert("facesTrain something");
+                                            alert("facesTrain success");
                                             evt = parseHelp(evt);
                                             asd3 = evt;
                                             $("#trainingResult").append("<p>"+JSON.stringify(evt)+"</p>");
@@ -111,6 +143,10 @@
                     }
                 }
             );
+        }
+
+        function loginSucces(){
+            
         }
 
         function parseHelp(ob){

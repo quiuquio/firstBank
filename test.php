@@ -39,8 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html>
 <head>
-	<script type="text/javascript" src="js/jsbn.js"></script> 
-	<script type="text/javascript" src="js/prng4.js"></script> 
+	<script type="text/javascript" src="js/jsbn.js"></script>
+	<script type="text/javascript" src="js/prng4.js"></script>
 	<script type="text/javascript" src="js/rng.js"></script>
 	<script type="text/javascript" src="js/rsa.js"></script>
 	<script type="text/javascript">
