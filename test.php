@@ -1,5 +1,5 @@
 <?php
-require_once('pass.php');
+/*require_once('pass.php');
 
 session_start();
 if (!isset($_SESSION["active"])) {
@@ -15,7 +15,8 @@ else {
 	session_destroy();
 	$key = NULL;
 }
-
+*/
+require_once('session.php');
 
 
 $encrypted = "";
@@ -28,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 	else {
 		$output = $key->decrypt($encrypted);
-		if ($output == NULL) {
+		if ($output == "") {
 			$output = "decrypt failed";
 		}
 	}
@@ -74,24 +75,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <p><?php echo $encrypted;?></p>
 <p><?php echo $output;?></p>
 
-<?php
-$stock = "0001.HK";
-$sMonth = 0; //$_GET['sM'] - 1;
-$sDay = 4;//$_GET['sD'];
-$sYear = 2012;//$_GET['sY'];
-$eMonth = 8;//$_GET['eM'] - 1;
-$eDay = 4;//$_GET['eD'];
-$eYear = 2013;//$_GET['eY'];
-$url = "http://ichart.finance.yahoo.com/table.csv?s=$stock&d=$eMonth&e=$eDay&f=$eYear&g=d&a=$sMonth&b=$sDay&c=$sYear&ignore=.csv";
-$url = "http://download.finance.yahoo.com/d/quotes.csv?s=%40%5EDJI,GOOG&f=nsl1op&e=.csv";
-
-$raw = file_get_contents($url);
-// Split results, trim way the extra line break at the end
-$quotes = explode("\n",$raw);
-print_r($quotes);
- 
-
-?>
 
 </body>
 </html>

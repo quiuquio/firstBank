@@ -78,7 +78,7 @@ class RSA
 	public function decrypt ($indata) {
 		//hexadecimal data
 		if (!ctype_xdigit($indata)) {
-			return NULL;
+			return "";
 		}
 		$indata = pack("H*", $indata);
 
@@ -87,7 +87,7 @@ class RSA
 			return $decrypted;
 		}
 		else {
-			return NULL;
+			return "";
 		}
 	}
 }
