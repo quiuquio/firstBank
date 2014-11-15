@@ -1,28 +1,31 @@
 <div id="leftcolumn">
+        <form name="menu" id="menuForm">
+            <input type="submit" id="selectedPage" name="selectedPage" value="" hidden>
+        </form>
         <div id="accordian">
         <ul>
             <li>
                 <h3><span class="icon-dashboard"></span>Account</h3>
                 <ul>
-                    <li><a href="#">Select account</a></li>
-                    <li><a href="#">List Transactions</a></li>
-                    <li><a href="#">Saving account</a></li>
-                    <li><a href="#">User settings</a></li>
+                    <li id="selectAccount"><a href="#">Select account</a></li>
+                    <li id="listTransactions"><a href="#">List Transactions</a></li>
+                    <li id="savingAccounts"><a href="#">Saving account</a></li>
+                    <li id="userSettings"><a href="#">User settings</a></li>
                 </ul>
             </li>
             <!-- class="active" will keep this LI open by default -->
             <li class="active">
                 <h3><span></span>Paymets</h3>
                 <ul>
-                    <li><a href="#">Make a payment</a></li>
-                    <li><a href="#">Set up recurring payments (Bills...)</a></li>
+                    <li id="makePayments"><a href="#">Make a payment</a></li>
+                    <li id="recurringPayments"><a href="#">Set up recurring payments (Bills...)</a></li>
                 </ul>
             </li>
             <li>
                 <h3><span></span>Financial Tools</h3>
                 <ul>
-                    <li><a href="#">Market Tracker</a></li>
-                    <li><a href="#">Current Prices</a></li>
+                    <li id="financialTracker"><a href="#">Market Tracker</a></li>
+                    <li id="currentPrices"><a href="#">Current Prices</a></li>
                 </ul>
             </li>
             <li>
@@ -32,29 +35,6 @@
                     <li><a href="#">And here? No idea :D</a></li>
                 </ul>
             </li>
-            <!--<li>
-                <h3><span class="icon-calendar"></span>Calendar</h3>
-                <ul>
-                    <li><a href="#">Current Month</a></li>
-                    <li><a href="#">Current Week</a></li>
-                    <li><a href="#">Previous Month</a></li>
-                    <li><a href="#">Previous Week</a></li>
-                    <li><a href="#">Next Month</a></li>
-                    <li><a href="#">Next Week</a></li>
-                    <li><a href="#">Team Calendar</a></li>
-                    <li><a href="#">Private Calendar</a></li>
-                    <li><a href="#">Settings</a></li>
-                </ul>
-            </li>-->
-            <!--<li>
-                <h3><span class="icon-heart"></span>Favourites</h3>
-                <ul>
-                    <li><a href="#">Global favs</a></li>
-                    <li><a href="#">My favs</a></li>
-                    <li><a href="#">Team favs</a></li>
-                    <li><a href="#">Settings</a></li>
-                </ul>
-            </li>-->
         </ul>
     </div>
     
@@ -68,7 +48,28 @@
         {
             $(this).next().slideDown();
         }
-    })
+    });
+
+    /*$('#selectAccount').click(function(evt){
+        var form = $("#menuForm")[0]; // we need to use jquery to acces the next functions
+        form.setAttribute("action", "index.php");
+        form.setAttribute("method", "POST");
+        form.setAttribute('value','selectAccount');
+        form.submit();
+    });*/
+    var menuButtons = $("#accordian ul li ul li"); //select all buttons in menu, but only the buttons.
+    $.each(menuButtons, function(key, value){
+        console.log(key, value);
+        $('#'+value.id).click(function(evt){
+            var form = $("#menuForm")[0]; // we need to use jquery to acces the next functions
+            form.setAttribute("action", "index.php");
+            form.setAttribute("method", "POST");
+            var input = $("#selectedPage")[0];
+            input.setAttribute('value', value.id);
+            //form.submit();
+            input.click();
+        });
+    });
 })
 
 </script>

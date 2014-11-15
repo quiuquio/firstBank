@@ -2,6 +2,7 @@
 require_once('pass.php');
 
 session_start();
+destroySessionIfRequired();
 if (!isset($_SESSION["active"])) {
 	$_SESSION["active"] = time();
 	$key = new RSA();
@@ -14,6 +15,12 @@ elseif ((time()-$_SESSION["active"]) < 900) {
 else {
 	session_destroy();
 	$key = NULL;
+}
+
+function destroySessionIfRequired(){
+    if((isset($_POST['destroySection']) && !empty($_POST['destroySection']))){
+            session_destroy();
+    }
 }
 
 ?>
