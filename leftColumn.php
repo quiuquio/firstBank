@@ -4,10 +4,10 @@
             <li>
                 <h3><span class="icon-dashboard"></span>Account</h3>
                 <ul>
+                    <li><a href="#">Select account</a></li>
                     <li><a href="#">List Transactions</a></li>
                     <li><a href="#">Saving account</a></li>
-                    <li><a href="#">Bill payment</a></li>
-                    <li><a href="#">Electronic Transfer</a></li>
+                    <li><a href="#">User settings</a></li>
                 </ul>
             </li>
             <!-- class="active" will keep this LI open by default -->
@@ -15,8 +15,7 @@
                 <h3><span></span>Paymets</h3>
                 <ul>
                     <li><a href="#">Make a payment</a></li>
-                    <li><a href="#">Set up recurring payments</a></li>
-                    <li><a href="#">Financial statements</a></li>
+                    <li><a href="#">Set up recurring payments (Bills...)</a></li>
                 </ul>
             </li>
             <li>
@@ -58,13 +57,7 @@
             </li>-->
         </ul>
     </div>
-
-<!-- prefix free to deal with vendor prefixes -->
-<script src="https://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
-
-<!-- jQuery -->
-<!--<script src="http://thecodeplayer.com/uploads/js/jquery-1.7.1.min.js" type="text/javascript"></script>-->    
-
+    
 <script type="text/javascript">
     $(document).ready(function(){
     $("#accordian h3").click(function(){
