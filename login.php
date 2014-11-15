@@ -16,7 +16,7 @@
                 document.getElementById(id).value = edata;
             }
         }
-        //encryptdata = function(asd) { return asd;}
+        encryptdata = function(asd) { return asd;}
 </script>   
 
 <?php

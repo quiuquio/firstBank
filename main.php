@@ -3,7 +3,7 @@
 if session user is not set we show the login page
 */
 echo "<main>";
-if(1){
+if(0){
     require('login.php');
 }
 else{
@@ -23,7 +23,10 @@ else{
                 break;
             case 'recurringPayments':
                 require('recurringPayments.php');
-                break;  
+                break;
+            case 'loanInformation':
+                require('loanInformation.php');
+                break; 
             default:
                 require('listTransactions.php');
                 break;

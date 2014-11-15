@@ -196,3 +196,10 @@ iframe {
 #transactionsList tr > td, th{
     border: solid thin black;  
 }
+
+#sessionInfo{
+    float: right;
+}
+#welcomeMessage{
+    float:left;
+}

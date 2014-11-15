@@ -2,7 +2,7 @@
 require_once('pass.php');
 
 session_start();
-destroySessionIfRequired();
+logout();
 if (!isset($_SESSION["active"])) {
 	$_SESSION["active"] = time();
 	$key = new RSA();
@@ -17,9 +17,9 @@ else {
 	$key = NULL;
 }
 
-function destroySessionIfRequired(){
-    if((isset($_POST['destroySection']) && !empty($_POST['destroySection']))){
-            session_destroy();
+function logout(){
+    if((isset($_POST['logout']) && !empty($_POST['logout']))){
+        session_destroy();
     }
 }
 
