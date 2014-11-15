@@ -1,4 +1,3 @@
-<main>
 <script type="text/javascript" src="js/FCClientJS.js"></script>
 <div style="text-align:center; display:block">
     <video id="video" width="640" height="480" autoplay></video>
@@ -103,7 +102,7 @@
                     }
                     else if (evt.photos[0].tags[0].uids.length > 0 && evt.photos[0].tags[0].uids[0].confidence > 45) {
                         $.unblockUI();
-                        $_SESSION['user'] = user.name;
+                        //$_SESSION['user'] = user.name;
                         console.log("Succes!!! data:", evt);
                         //loginSuccess(evt);
                     } else {
@@ -181,4 +180,3 @@
           $('#'+id).html('<div class="alert '+type+'"><a class="close" data-dismiss="alert">x</a><span>'+message+'</span></div>')
         }
     </script>
-</main>

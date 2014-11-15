@@ -184,6 +184,15 @@ footer {
     display:none !important;
 }
 iframe {
-    width: inherit;
+    width: 90%;
     margin: 1%;
+}
+
+#transactionsList{
+    border: solid thin black;
+    border-collapse: collapse;
+    text-align: center;
+}
+#transactionsList tr > td, th{
+    border: solid thin black;  
 }
