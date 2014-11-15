@@ -121,12 +121,10 @@ footer {
 }
 
 
-
-
 #accordian {
     background: #004050;
     width: 100%;
-    margin: 100px auto 0 auto;
+    margin: 0 auto 0 auto;
     color: white;
     /*Some cool shadow and glow effect*/
     box-shadow: 

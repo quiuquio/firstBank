@@ -9,14 +9,24 @@
 </div>
 <div id="trainingResult"></div>
 
+<!-- Messages for this page -->
 <div id="domMessage" style="display:none;"> 
     <h1>We are processing your request.  Please be patient.</h1> 
+</div>
+<div id="errorInFacialLogin" style="display:none;"> 
+    <h1>
+        We were not able to recognize you from the last snapshot. Please try again or proceed with the traditional login.
+    </h1> 
+    <input class="unblockButton" type="submit" value="Unblock">
 </div>
 
     <script>
         // Put event listeners into place
         window.addEventListener("DOMContentLoaded", function() {
             // Grab elements, create settings, etc.
+            $('.unblockButton').click(function() { 
+                $.unblockUI(); 
+            });  
 
             var canvas = document.getElementById("canvas"),
                 context = canvas.getContext("2d"),
@@ -72,6 +82,7 @@
         }
 
         function login(image, usr) {
+            $.blockUI({ message: $('#domMessage') });
             var client = new FCClientJS( apiKey, apiSecret);
 
             //client.facesRecognize('guido', 'http://farm1.static.flickr.com/41/104498903_bad315cee0.jpg', null, {namespace: "banktestspace"}, callback);
@@ -83,20 +94,25 @@
             client.facesRecognize(usr.name, null, [blob], {namespace: "banktestspace"}, 
                 function(evt){
                     evt = parseHelp(evt);
+                    asd = evt;
                     console.log(evt);
-                    //User found go ahead and login !
-                        if (evt.photos[0].tags[0].uids.length > 0 && evt.photos[0].tags[0].uids[0].confidence > 40) {
-                            asd = evt;
-                            console.log("Succes!!! data:", evt);
-                            //loginSuccess(evt);
-                        } else {
-                            asd = evt;
-                            console.log("FAIL!!! data:", evt);
-                            //loginFail(evt);
-                          
-                        }
+                    if(evt.photos[0].tags.length == 0){
+                        $.unblockUI();
+                        $.blockUI({message: $('#errorInFacialLogin')});
+                        console.log("FAIL!!! data:", evt);
+                    }
+                    else if (evt.photos[0].tags[0].uids.length > 0 && evt.photos[0].tags[0].uids[0].confidence > 45) {
+                        $.unblockUI();
+                        $_SESSION['user'] = user.name;
+                        console.log("Succes!!! data:", evt);
+                        //loginSuccess(evt);
+                    } else {
+                        $.unblockUI();
+                        $.blockUI({message: $('#errorInFacialLogin')});
+                        console.log("FAIL!!! data:", evt);
+                        //loginFail(evt);
+                    }
                 });
-            $.msg({ autoUnblock:false, content: $('#domMessage').html() });
         }
 
         function trainFacialRecognition(imgArray, usr){
@@ -146,7 +162,7 @@
         }
 
         function loginSucces(){
-            
+
         }
 
         function parseHelp(ob){

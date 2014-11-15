@@ -15,10 +15,8 @@
                 <h3><span></span>Paymets</h3>
                 <ul>
                     <li><a href="#">Make a payment</a></li>
-                    <li><a href="#">Urgent</a></li>
-                    <li><a href="#">Overdues</a></li>
-                    <li><a href="#">Recurring</a></li>
-                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Set up recurring payments</a></li>
+                    <li><a href="#">Financial statements</a></li>
                 </ul>
             </li>
             <li>
@@ -62,7 +60,7 @@
     </div>
 
 <!-- prefix free to deal with vendor prefixes -->
-<script src="http://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
+<script src="https://thecodeplayer.com/uploads/js/prefixfree-1.0.7.js" type="text/javascript" type="text/javascript"></script>
 
 <!-- jQuery -->
 <!--<script src="http://thecodeplayer.com/uploads/js/jquery-1.7.1.min.js" type="text/javascript"></script>-->    

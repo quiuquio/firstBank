@@ -2,7 +2,14 @@
 /*
 if session user is not set we show the login page
 */
-echo "<main>";
-require('login.php');
-echo "</main>";
+if(1){
+    echo "<main>";
+    require('login.php');
+    echo "</main>";
+}
+else{
+    echo "<main>";
+    require('logged.php');
+    echo "</main>";
+}
 ?>

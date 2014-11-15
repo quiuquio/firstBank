@@ -4,7 +4,7 @@ echo '<link rel="stylesheet" type="text/css" href="styles/main.css">';
 echo    '
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery.blockUI.js"></script>
-        <script src="https://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
         ';
 echo "<div id='wrapper'>";
 require('header.php');
