@@ -1,6 +1,6 @@
 
 <script type="text/javascript">
-        
+        // encrypt password before sending
         function encryptdata(id) {
             var keyn = "<?php echo ($key==NULL)? 0:$key->rsa_n; ?>";
             var keye = "<?php echo ($key==NULL)? 0:$key->rsa_e; ?>";
@@ -16,7 +16,6 @@
                 document.getElementById(id).value = edata;
             }
         }
-        //encryptdata = function(asd) { return asd;}
 </script>   
 
 <?php
@@ -41,8 +40,7 @@ if(isset($_POST['user_name']) && !empty($_POST['user_name'])){
         else {
             if (dbconnect($con)) {
                 $sqlstr = "SELECT u_id FROM login WHERE user_name='".$username."' AND md5_pw1=MD5('".$passwd."')";
-                $result = mysql_query($sqlstr);
-                $row = mysql_fetch_array($result);
+                $row = dbquery($sqlstr);
                 //var_dump($row);
                 if ($row == NULL) {
                     echo "<p>Login failed. Please try again.</p>";
@@ -50,7 +48,6 @@ if(isset($_POST['user_name']) && !empty($_POST['user_name'])){
                 }
                 else {
                     $_SESSION["uid"] = $row["u_id"];
-                    
                     $p->showPageLoginForm2();
                 }
             }
