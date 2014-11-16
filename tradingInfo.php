@@ -113,5 +113,3 @@ new TradingView.MiniWidget({
 });
 </script>
 <!-- TradingView Widget END -->
-
-<!-- TradingView Widget END -->

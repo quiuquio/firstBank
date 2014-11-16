@@ -1,6 +1,7 @@
 <header>
     <h1 id="welcomeMessage">
-        Welcome to <span class="logo"><span class="logo_first">First</span><span class="logo_Bank">Bank</span></span>
+       <span class="logo"><span class="logo_first">First</span><span class="logo_Bank">Bank</span></span> 
+       <p> Welcome <?php echo '$user_name';?>. </p>
     </h1>
     <div id="sessionInfo">
         <p>User: <a href="#" id="userSettings"><?php echo '$Username';?></a></p>
