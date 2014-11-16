@@ -247,6 +247,7 @@ iframe {
 .LightGrey{
     background-color: #D5F0D3;
 }
-.Content{
-
+.smallfont {  
+    font-size: 8pt;
+    color: #000000
 }

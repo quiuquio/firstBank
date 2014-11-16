@@ -21,24 +21,35 @@ else{
     if((isset($_POST['selectedPage']) && !empty($_POST['selectedPage']))){
         switch ($_POST['selectedPage']){
             case 'financialTracker':
+                setTitle("");
                 require('financialTracker.php');
                 break;
+            case 'selectAccount':
+                setTitle("Select Account");
+                require('selectAccount.php');
+                break;
             case 'userSettings':
+                setTitle("User Settings");
                 require('userSettings.php');
                 break;
             case 'makePayments':
+                setTitle("Make Payments");
                 require('makePayments.php');
                 break;  
-            case 'recurringPayments':
-                require('recurringPayments.php');
+            case 'billPayments':
+                setTitle("Billl Payments");
+                require('billPayments.php');
                 break;
             case 'recurringPayments':
+                setTitle("");
                 require('recurringPayments.php');
                 break;
             case 'loanInformation':
+                setTitle("Loans");
                 require('loanInformation.php');
                 break; 
             default:
+                setTitle("List of Transactions");
                 require('listTransactions.php');
                 break;
         }
@@ -51,4 +62,8 @@ else{
     }
 }
 echo "</main>";
+
+function setTitle($title){
+    echo "<title>{$title} | First Bank Limited</title>";
+}
 ?>
