@@ -121,7 +121,7 @@ class LoginPage{
                     If you have got any suspicious transaction or email, please contact us via (852) 1234-5678
                 </p></li> 
             </ul>
-            <p class='right'>For more information please read trough our <a id='secUseEB' href=#>Secure Use of e-Banking</a> 
+            <p class='right'>For more information please read trough our <a id='secUseEB' href=# title='Click here for more information on how to safelly use your e-banking service.'>Secure Use of e-Banking</a> 
             section.
             </p>
             </div>

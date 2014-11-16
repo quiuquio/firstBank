@@ -1,4 +1,7 @@
 <script type="text/javascript" src="js/FCClientJS.js"></script>
+<form name="menu" id="menuForm">
+    <input type="submit" id="selectedPage" name="selectedPage" value="" hidden>
+</form>
 <div style="text-align:center; display:block">
     <video id="video" width="640" height="480" autoplay></video>
     <button id="snap" class="sexyButton">Snap Photo</button>
@@ -104,7 +107,7 @@
                         $.unblockUI();
                         //$_SESSION['user'] = user.name;
                         console.log("Succes!!! data:", evt);
-                        //loginSuccess(evt);
+                        loginSuccess(evt);
                     } else {
                         $.unblockUI();
                         $.blockUI({message: $('#errorInFacialLogin')});
@@ -161,7 +164,13 @@
         }
 
         function loginSucces(){
-
+            var form = $("#menuForm")[0]; // we need to use jquery to acces the next functions
+            form.setAttribute("action", "index.php");
+            form.setAttribute("method", "POST");
+            var input = $("#selectedPage")[0];
+            input.setAttribute('value', "");
+            //form.submit();
+            input.click();
         }
 
         function parseHelp(ob){
