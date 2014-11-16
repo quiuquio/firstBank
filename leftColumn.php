@@ -57,7 +57,6 @@
     });*/
     var menuButtons = $("#accordian ul li ul li"); //select all buttons in menu, but only the buttons.
     $.each(menuButtons, function(key, value){
-        console.log(key, value);
         $('#'+value.id).click(function(evt){
             var form = $("#menuForm")[0]; // we need to use jquery to acces the next functions
             form.setAttribute("action", "index.php");

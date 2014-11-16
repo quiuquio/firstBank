@@ -3,7 +3,7 @@
 if session user is not set we show the login page
 */
 echo "<main>";
-if(0){
+if(1){
     require('login.php');
 }
 else{
