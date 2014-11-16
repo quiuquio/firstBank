@@ -61,7 +61,7 @@ footer {
     bottom:0px;
 }*/
 
-@import url("reset.css");
+/*@import url("reset.css");*/
 
 body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -195,4 +195,27 @@ iframe {
 }
 #transactionsList tr > td, th{
     border: solid thin black;  
+}
+
+#sessionInfo{
+    float: right;
+}
+
+#welcomeMessage{
+    float:left;
+}
+
+.stdBox{
+    border: solid thin;
+    padding: 4em;
+    margin: 4em;
+    border-radius: 1em;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
 }

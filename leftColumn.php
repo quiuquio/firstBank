@@ -9,8 +9,6 @@
                 <ul>
                     <li id="selectAccount"><a href="#">Select account</a></li>
                     <li id="listTransactions"><a href="#">List Transactions</a></li>
-                    <li id="savingAccounts"><a href="#">Saving account</a></li>
-                    <li id="userSettings"><a href="#">User settings</a></li>
                 </ul>
             </li>
             <!-- class="active" will keep this LI open by default -->
@@ -18,7 +16,7 @@
                 <h3><span></span>Paymets</h3>
                 <ul>
                     <li id="makePayments"><a href="#">Make a payment</a></li>
-                    <li id="recurringPayments"><a href="#">Set up recurring payments (Bills...)</a></li>
+                    <li id="recurringPayments"><a href="#">Timed payments</a></li>
                 </ul>
             </li>
             <li>
