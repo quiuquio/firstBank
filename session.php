@@ -20,6 +20,7 @@ else {
 function logout(){
     if((isset($_POST['logout']) && !empty($_POST['logout']))){
         session_destroy();
+        session_start();
     }
 }
 

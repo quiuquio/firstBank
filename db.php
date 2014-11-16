@@ -49,7 +49,7 @@ function dbGetUid($username, $passwd) {
 
 function dbGetPrimeRates() {
 	if (dbconnect($con)) {
-		$sqlstr = "SELECT * FROM prime_rate";
+		$sqlstr = "SELECT * FROM prime_rate ORDER BY e_date";
 		$rows = dbquery($sqlstr);
 		dbclose($con);
 		return $rows;
