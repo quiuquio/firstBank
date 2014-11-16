@@ -7,6 +7,7 @@ if (!isset($_SESSION["active"])) {
 	$_SESSION["active"] = time();
 	$key = new RSA();
 	$_SESSION["skey"] = $key;
+	$_SESSION["login"] = 0;
 }
 elseif ((time()-$_SESSION["active"]) < 900) {
 	$_SESSION["active"] = time();

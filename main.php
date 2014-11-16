@@ -3,7 +3,18 @@
 if session user is not set we show the login page
 */
 echo "<main>";
-if(1){
+
+
+function checkLogin() {
+    //var_dump($_SESSION);
+    //var_dump($_POST);
+    if((isset($_SESSION["uid"])) && (!empty($_SESSION["uid"])) && (isset($_POST['selectedPage']) && $_POST['selectedPage'] == "facialsuccess")) {
+        $_SESSION["login"] = 1;
+    }
+}
+checkLogin();
+
+if($_SESSION["login"]==0){
     require('login.php');
 }
 else{

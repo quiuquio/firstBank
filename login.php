@@ -33,7 +33,7 @@ if(isset($_POST['user_name']) && !empty($_POST['user_name'])){
     else {
         $passwd = $key->decrypt($passwd);
         if ($passwd == "") {
-            echo "<p>Password encryption fail. Please try angin.</p>";
+            echo "<p>Password encryption fail. Please try again.</p>";
             $p->showPageLoginForm();
         }
         else {

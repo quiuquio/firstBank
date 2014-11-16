@@ -163,12 +163,12 @@
             );
         }
 
-        function loginSucces(){
+        function loginSuccess(){
             var form = $("#menuForm")[0]; // we need to use jquery to acces the next functions
             form.setAttribute("action", "index.php");
             form.setAttribute("method", "POST");
             var input = $("#selectedPage")[0];
-            input.setAttribute('value', "");
+            input.setAttribute('value', "facialsuccess");
             //form.submit();
             input.click();
         }
