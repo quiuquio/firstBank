@@ -75,6 +75,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <p><?php echo $encrypted;?></p>
 <p><?php echo $output;?></p>
 
+<?php
+require_once('db.php');
+$prs = dbGetPrimeRates();
+var_dump($prs);
+$uid = dbGetUid("testuser","qwe");
+var_dump($uid);
+if ($uid>0) {
+	echo "ok";
+}
+?>
 
 </body>
 </html>

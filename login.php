@@ -38,21 +38,14 @@ if(isset($_POST['user_name']) && !empty($_POST['user_name'])){
             $p->showPageLoginForm();
         }
         else {
-            if (dbconnect($con)) {
-                $sqlstr = "SELECT u_id FROM login WHERE user_name='".$username."' AND md5_pw1=MD5('".$passwd."')";
-                $row = dbquery($sqlstr);
-                //var_dump($row);
-                if ($row == NULL) {
-                    echo "<p>Login failed. Please try again.</p>";
-                    $p->showPageLoginForm();
-                }
-                else {
-                    $_SESSION["uid"] = $row["u_id"];
-                    $p->showPageLoginForm2();
-                }
+            $uid = dbGetUid($username, $passwd);
+            if ($uid > 0) {
+                $_SESSION["uid"] = $uid;
+                $p->showPageLoginForm2();
             }
             else {
-                echo "<p>DB error. Please <a href=\"", htmlspecialchars($_SERVER["PHP_SELF"]), "\">login</a> again.</p>";
+                echo "<p>Login failed. Please try again.</p>";
+                $p->showPageLoginForm();
             }
         }
     }

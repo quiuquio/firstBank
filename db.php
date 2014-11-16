@@ -28,7 +28,33 @@ function dbquery($sqlstr) {
 		echo "<p>Invalid query</p>";
 		return NULL;
 	}
-    return mysql_fetch_array($result);
+	$rows = array();
+    while($row = mysql_fetch_array($result)) {
+    	array_push($rows, $row);
+    }
+    return $rows;
+}
+
+function dbGetUid($username, $passwd) {
+	$uid = -1;
+	if (dbconnect($con)) {
+		$sqlstr = "SELECT u_id FROM login WHERE user_name='".$username."' AND md5_pw1=MD5('".$passwd."')";
+		$rows = dbquery($sqlstr);
+		if (count($rows) > 0) {
+			return $rows[0]["u_id"];
+		}
+	}
+	return $uid;
+}
+
+function dbGetPrimeRates() {
+	if (dbconnect($con)) {
+		$sqlstr = "SELECT * FROM prime_rate";
+		$rows = dbquery($sqlstr);
+		dbclose($con);
+		return $rows;
+	}
+	return NULL;
 }
 
 ?>
