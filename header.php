@@ -1,6 +1,9 @@
 <header>
+    <div class="logoContainer left">
+        <img src="imgs/e-banking32.gif">
+    </div>
     <h1 id="welcomeMessage">
-       <span class="logo"><span class="logo_first">First</span><span class="logo_Bank">Bank</span></span> 
+       <!--<span class="logo"><span class="logo_first">First</span><span class="logo_Bank">Bank</span></span>-->
        <p> Welcome <?php echo '$user_name';?>. </p>
     </h1>
     <div id="sessionInfo">

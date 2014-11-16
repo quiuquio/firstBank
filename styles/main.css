@@ -219,3 +219,16 @@ iframe {
 .right{
     float: right;
 }
+
+#custServ{
+    width: 30%;
+    clear: both;
+}
+
+.logoContainer{
+    height: 100%
+}
+
+.logoContainer img{
+    height: 100%
+}
