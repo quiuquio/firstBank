@@ -232,3 +232,21 @@ iframe {
 .logoContainer img{
     height: 100%
 }
+
+.Title2{
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.BlackTitle{
+    font-weight: bold;   
+}
+.MiddleGrey{
+    background-color: #85CF80;
+}
+.LightGrey{
+    background-color: #D5F0D3;
+}
+.Content{
+
+}
