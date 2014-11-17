@@ -8,6 +8,7 @@
                 <h3><span class="icon-dashboard"></span>Account</h3>
                 <ul>
                     <li id="selectAccount"><a href="#">Select account</a></li>
+                    <li id="accountSummary"><a href="#">Account Summary</a></li>
                     <li id="listTransactions"><a href="#">List Transactions</a></li>
                 </ul>
             </li>
@@ -16,6 +17,8 @@
                 <h3><span></span>Paymets</h3>
                 <ul>
                     <li id="makePayments"><a href="#">Make a payment</a></li>
+                    <li id="3rdPartyTransfer"><a href="#">Third Party transfer</a></li>
+                    <li id="billPayment"><a href="#">Bill payment</a></li>
                     <li id="recurringPayments"><a href="#">Timed payments</a></li>
                 </ul>
             </li>
@@ -29,6 +32,7 @@
             <li>
                 <h3><span></span>Loans</h3>
                 <ul>
+                    <li id="mortgage"><a href="#">Mortgage</a></li>
                     <li><a href="#">What here?</a></li>
                     <li><a href="#">And here? No idea :D</a></li>
                 </ul>

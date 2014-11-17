@@ -14,7 +14,7 @@ function checkLogin() {
 }
 checkLogin();
 
-if($_SESSION["login"]==0){
+if($_SESSION["login"]==123){
     require('login.php');
 }
 else{
@@ -47,7 +47,11 @@ else{
             case 'loanInformation':
                 setTitle("Loans");
                 require('loanInformation.php');
-                break; 
+                break;
+            case 'mortgage':
+                setTitle("Mortgage");
+                require('mortgage.php');
+                break;
             default:
                 setTitle("List of Transactions");
                 require('listTransactions.php');
