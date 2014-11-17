@@ -36,9 +36,9 @@ else{
                 setTitle("Make Payments");
                 require('makePayments.php');
                 break;  
-            case 'billPayments':
+            case 'billPayment':
                 setTitle("Billl Payments");
-                require('billPayments.php');
+                require('billPayment.php');
                 break;
             case 'recurringPayments':
                 setTitle("");

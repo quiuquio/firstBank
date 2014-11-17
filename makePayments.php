@@ -54,10 +54,6 @@
             <font class="CONTENT">Transfer Date</font></td>
             <td class="LightGrey"><font class="SELECT"> 
             <select name="effDate" onfocus="">
-                <option value="17-11-2014">17-11-2014</option>
-                <option value="18-11-2014">18-11-2014</option>
-                <option value="19-11-2014">19-11-2014</option>
-                <option value="20-11-2014">20-11-2014</option>
                 <option value="21-11-2014">21-11-2014</option>
                 <option value="22-11-2014">22-11-2014</option>
                 <option value="24-11-2014">24-11-2014</option>
