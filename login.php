@@ -45,12 +45,14 @@ if(isset($_POST['user_name']) && !empty($_POST['user_name'])){
             else {
                 echo "<p>Login failed. Please try again.</p>";
                 $p->showPageLoginForm();
+                //$p->showPageLoginForm2();
             }
         }
     }
 }
 else if (!isset($_POST['user_name']) && empty($_POST['user_name'])){
     $p->showPageLoginForm();
+    //$p->showPageLoginForm2();
 }
 
 function getpost($iname) {
@@ -85,6 +87,20 @@ class LoginPage{
 
     */
     public function showPageLoginForm2(){
+        $posString = gen2ndPwPos();
+        $selectedIpunt = explode("-", $posString);
+        $vals = [];
+        $disables = [];
+        for($i=0; $i<8; $i++){
+            if(in_array($i, $selectedIpunt)){
+                array_push($vals, "");
+                array_push($disables, "");
+            }
+            else{
+                array_push($vals, "value='.'");
+                array_push($disables, "disabled='disabled'");
+            }
+        }
         echo    '
                 <script type="text/javascript" src="js/jsbn.js"></script>
                 <script type="text/javascript" src="js/prng4.js"></script>
@@ -93,10 +109,43 @@ class LoginPage{
                 ';
         echo '<h2>Login 2</h2>';
         echo '<form method="post" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" name="loginform">';
-        echo '<label for="login_input_password">Password</label> ';
-        echo '<input id="login_input_password" type="password" name="user_password" required /> ';
-        echo '<input type="submit"  name="login" value="Log in" />';
+        echo '<label for="pw2Block">Password</label> ';
+        echo '<!--<input id="login_input_password" type="password" name="user_password" required />-->';
+        echo "
+                <div id='pw2Block'>
+                <input type='password' maxlength='1' name='pw2_0' {$vals[0]} {$disables[0]}/>
+                <input type='password' maxlength='1' name='pw2_1' {$vals[1]} {$disables[1]}/>
+                <input type='password' maxlength='1' name='pw2_2' {$vals[2]} {$disables[2]}/>
+                <input type='password' maxlength='1' name='pw2_3' {$vals[3]} {$disables[3]}/>
+                <input type='password' maxlength='1' name='pw2_4' {$vals[4]} {$disables[4]}/>
+                <input type='password' maxlength='1' name='pw2_5' {$vals[5]} {$disables[5]}/>
+                <input type='password' maxlength='1' name='pw2_6' {$vals[6]} {$disables[6]}/>
+                <input type='password' maxlength='1' name='pw2_7' {$vals[7]} {$disables[7]}/>
+                </div>
+            ";
+        echo '<button id="login2Button">Log in</button>';    
+        echo '<input id="login2" name="posString" hidden/>';
+        echo '<input type="submit" id="login2" name="login" value="Log in" hidden/>';
         echo '</form>';
+        ?>
+<script type="text/javascript">
+    var login = $("#pw2Block input"); // select all buttons in menu, but only the buttons.
+    var pw = "";
+    $.each(login, function(key, value){
+        pw += value.value=='.' ? '' : value.value+"-";
+    });
+    pw = pw.substring(0, pw.length - 1);
+    $('#login2Button').click(function(evt){
+            var form = $("#loginform")[0]; // we need to use jquery to acces the next functions
+            form.setAttribute("action", "index.php");
+            form.setAttribute("method", "POST");
+            var input = $("#login2")[0];
+            var pw = 
+            input.setAttribute('value', pw);
+            input.click();
+        });
+</script>
+        <?php
         echo '<h2>Or try the facial recognition Login</h2>';
         require('facialLogin.php');
     }
@@ -153,7 +202,7 @@ class LoginPage{
                     Do not use your birthday, name, Hong Kong Identity Card number, telephone number or similar numbers as your passwords.
                     Change your passwords on a regular basis, at least every 30 or 60 days.
                     Do not use passwords from other Internet sites.
-                    We maintain strict security standards and procedures to prevent unauthorized access to information about you. Outside of the normal Internet Banking log-in process, Hang Seng Bank will never contact you and ask that you validate password. If you receive such a request, please notify us immediately at 2822-0228.
+                    We maintain strict security standards and procedures to prevent unauthorized access to information about you. Outside of the normal Internet Banking log-in process, First Bank will never contact you and ask that you validate password. If you receive such a request, please notify us immediately at 2822-0228.
         
                 <h3>Be careful when you go online</h3>
                     Avoid conducting banking transactions or check account balances from public terminals which are shared with other users (e.g internet cafes), as it is difficult to ensure such PCs are free of hacker programs (someone might be able to access your personal or account information).
