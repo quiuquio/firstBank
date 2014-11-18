@@ -35,11 +35,21 @@ function dbquery($sqlstr) {
     return $rows;
 }
 
+function dbupdate($sqlstr) {
+	$result = mysql_query($sqlstr);
+	if (!$result) {
+		echo "<p>DB error</p>";
+		return FALSE;
+	}
+    return TRUE;
+}
+
 function dbGetUid($username, $passwd) {
 	$uid = -1;
 	if (dbconnect($con)) {
 		$sqlstr = "SELECT u_id FROM login WHERE user_name='".$username."' AND md5_pw1=MD5('".$passwd."')";
 		$rows = dbquery($sqlstr);
+		dbclose($con);
 		if (count($rows) > 0) {
 			return $rows[0]["u_id"];
 		}
@@ -47,14 +57,106 @@ function dbGetUid($username, $passwd) {
 	return $uid;
 }
 
-function dbGetPrimeRates() {
+function dbGetPrimeRates(&$curPR) {
 	if (dbconnect($con)) {
-		$sqlstr = "SELECT * FROM prime_rate ORDER BY e_date";
+		$sqlstr = "SELECT * FROM Prime_Rate ORDER BY eff_date DESC";
+		$rows = dbquery($sqlstr);
+		$curPR = $rows[0]["rate"];
+		dbclose($con);
+		return $rows;
+	}
+	return NULL;
+}
+
+function getTransactions($acctNum) {
+	if (dbconnect($con)) {
+		$sqlstr = "SELECT * FROM transactions WHERE account_1_num='$acctNum'";
 		$rows = dbquery($sqlstr);
 		dbclose($con);
 		return $rows;
 	}
 	return NULL;
+}
+
+function getBalance($acctNum) {
+	$balance = -1;
+	if (dbconnect($con)) {
+		$sqlstr = "SELECT balance FROM user_acct WHERE acct_no='$acctNum'";
+		$rows = dbquery($sqlstr);
+		dbclose($con);
+		if (count($rows) > 0) {
+			$balance = $rows[0]["balance"];
+		}
+	}
+	return $balance;
+}
+
+function updateBalance($acctNum, $amount) {
+	if (dbconnect($con)) {
+		$sqlstr = "UPDATE user_acct SET balance='$amount' WHERE acct_no='$acctNum'";
+		$result = dbupdate($sqlstr);
+		dbclose($con);
+		return $result;
+	}
+	return FALSE;
+}
+
+function addTransaction($acct1, $acct2, $transType, $amount, $ttid, $status, $fees, $remarks, $balance, $interBank) {
+	if (dbconnect($con)) {
+		$colstr = "account_1_num, transaction_type, amount, t_status, current_balance, t_interbank";
+		$valstr = "'$acct1', '$transType', '$amount', '$status', '$balance', '$interBank'";
+		if ($acct2 != NULL) {
+			$colstr .= ", account_2_num";
+			$valstr .= ", '$acct2'";
+		}
+		if ($ttid != NULL) {
+			$colstr .= ", tt_id";
+			$valstr .= ", '$ttid'";
+		}
+		if ($fees != NULL) {
+			$colstr .= ", t_fees";
+			$valstr .= ", '$fees'";
+		}
+		if ($remarks != NULL) {
+			$colstr .= ", remarks";
+			$valstr .= ", '$remarks'";
+		}
+		$sqlstr = "INSERT INTO transactions ($colstr) VALUES ($valstr)";
+		echo "<p>$fees</p>";
+		echo "<p>$sqlstr</p>";
+		$result = dbupdate($sqlstr);
+		dbclose($con);
+		return $result;
+	}
+	return FALSE;
+}
+
+function mTransfer($acct1, $acct2, $amount, $remarks, $ttid) {
+	$acctBalance = getBalance($acct1);
+	if ($acctBalance < $amount) {
+		return FALSE;
+	}
+	else {
+		$newBalance = $acctBalance - $amount;
+		$interBank = 1;
+		updateBalance($acct1, $newBalance);
+		if ($acct2 != "") {
+			$acctBalance2 = getBalance($acct2);
+			$newBalance2 = $acctBalance2 + $amount;
+			$interBank = 0;
+			$transType = "TTI";
+			if ($ttid == NULL) {
+				$transType = "TFI";
+			}
+			updateBalance($acct2, $newBalance2);
+			addTransaction($acct2, $acct1, $transType, $amount, $ttid, "settled", "0", $remarks, $newBalance2, $interBank);
+		}
+		$transType = "TTO";
+		if ($ttid == NULL) {
+			$transType = "TFO";
+		}
+		addTransaction($acct1, $acct2, $transType, $amount, $ttid, "settled", "0", $remarks, $newBalance, $interBank);
+	}
 }
 
 ?>

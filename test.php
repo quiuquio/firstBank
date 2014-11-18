@@ -79,11 +79,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 require_once('db.php');
 $prs = dbGetPrimeRates();
 var_dump($prs);
-$uid = dbGetUid("testuser","qwe");
-var_dump($uid);
-if ($uid>0) {
-	echo "ok";
-}
+
+//echo getBalance("234567890000");
+mTransfer("234567890000", "23456789002", 100, "testing", NULL);
+
+
 ?>
 
 </body>
