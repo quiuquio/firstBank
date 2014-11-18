@@ -98,7 +98,30 @@ function setUserSession() {
 	if (isset($_SESSION["uid"]) && $_SESSION["login"]==1) {
 		$uid = $_SESSION["uid"];
 		if (dbconnect($con)) {
+			// get accounts
+			$sqlstr = "SELECT acct_no, acct_type, balance FROM user_acct WHERE u_id='$uid'";
+			$accts = dbquery($sqlstr);
+			$_SESSION["accts"] = $accts;
+
+			// get user contact
+			$sqlstr = "SELECT address FROM addresses WHERE u_id='$uid' AND status='active'";
+			$row = dbquery($sqlstr);
+			$_SESSION["addr"] = $row[0]["address"];
+			$sqlstr = "SELECT contact, info_type FROM contact_info WHERE u_id='$uid' AND status='active'";
+			$rows = dbquery($sqlstr);
+			$_SESSION["contacts"] = $rows;
+
 			dbclose($con);
+
+			//get transactions for each account
+			$acctTansactions = array();
+			for ($i=0; $i < count($accts); $i++) { 
+				$acctNum = $accts[$i]["acct_no"];
+				$acctTansactions[$acctNum] = getTransactions($acctNum);
+			}
+			$_SESSION["acctTansactions"] = $acctTansactions;
+			
+			
 			return TRUE;
 		}
 		return FALSE;

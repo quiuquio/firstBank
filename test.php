@@ -101,6 +101,18 @@ if (check2ndpw("w-r-i")) {
 }
 echo getLastLogin(1);
 
+$_SESSION["login"] = 1;
+$_SESSION["uid"] = 1;
+setUserSession();
+var_dump($_SESSION["accts"]);
+echo "<p></p>";
+var_dump($_SESSION["acctTansactions"]);
+echo "<p></p>";
+var_dump($_SESSION["addr"]);
+echo "<p></p>";
+var_dump($_SESSION["contacts"]);
+
+
 ?>
 
 </body>
