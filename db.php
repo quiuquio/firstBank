@@ -79,7 +79,8 @@ function loginRecord($username, $uid, $method, $success) {
 	return FALSE;
 }
 
-function getLastLogin($uid) {
+function getLastLogin() {
+	$uid = $_SESSION["uid"];
 	if (dbconnect($con)) {
 		$sqlstr = "SELECT time FROM login_records WHERE u_id='$uid' AND success='1' ORDER BY time DESC";
 		$rows = dbquery($sqlstr);
