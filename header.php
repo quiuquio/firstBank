@@ -10,10 +10,10 @@
         <p>User: <a href="#" id="userSettings"><?php echo '$Username';?></a></p>
         <p>Login date: <?php echo '$UserLoginTime';?></p>
         <p>Status: <?php echo '$ServiceStatus';?></p>
+        <form id="logoutForm" name="logoutForm" method="POST" action="index.php">
+            <input type="submit" name="logout" value="logout">
+        </form>
     </div>
-    <form name="logoutForm" method="POST" action="index.php">
-        <input type="submit" name="logout" value="logout">
-    </form>
     <script type="text/javascript">
         $('#userSettings').click(function(evt){
             var form = $("#menuForm")[0]; // we need to use jquery to acces the next functions
