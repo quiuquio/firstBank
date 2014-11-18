@@ -80,15 +80,30 @@ function loginRecord($username, $uid, $method, $success) {
 }
 
 function getLastLogin() {
-	$uid = $_SESSION["uid"];
-	if (dbconnect($con)) {
-		$sqlstr = "SELECT time FROM login_records WHERE u_id='$uid' AND success='1' ORDER BY time DESC";
-		$rows = dbquery($sqlstr);
-		$lastLogin = $rows[0]["time"];
-		dbclose($con);
-		return $lastLogin;
+	if (isset($_SESSION["uid"]) && $_SESSION["login"]==1) {
+		$uid = $_SESSION["uid"];
+		if (dbconnect($con)) {
+			$sqlstr = "SELECT time FROM login_records WHERE u_id='$uid' AND success='1' AND (method='2st_pw' OR method='facial') ORDER BY time DESC";
+			$rows = dbquery($sqlstr);
+			$lastLogin = $rows[0]["time"];
+			dbclose($con);
+			return $lastLogin;
+		}
+		return NULL;
 	}
 	return NULL;
+}
+
+function setUserSession() {
+	if (isset($_SESSION["uid"]) && $_SESSION["login"]==1) {
+		$uid = $_SESSION["uid"];
+		if (dbconnect($con)) {
+			dbclose($con);
+			return TRUE;
+		}
+		return FALSE;
+	}
+	return FALSE;
 }
 
 function dbGetPrimeRates(&$curPR) {

@@ -83,7 +83,7 @@ var_dump($prs);
 
 //echo getBalance("234567890000");
 mTransfer("234567890000", "23456789002", 100, "testing", NULL, FALSE);
-loginRecord(NULL, 1, "1st_pw", 1);
+loginRecord(NULL, 1, "2st_pw", 1);
 
 echo gen2ndpwPos();
 $str = "a-b-c";
