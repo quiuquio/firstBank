@@ -4,7 +4,7 @@
         </form>
         <div id="accordian">
         <ul>
-            <li>
+            <li class="active">
                 <h3><span class="icon-dashboard"></span>Account</h3>
                 <ul>
                     <li id="selectAccount"><a href="#">Select account</a></li>
@@ -21,14 +21,14 @@
                     <li id="billPayment"><a href="#">Bill Payment</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="active">
                 <h3><span></span>Financial Tools</h3>
                 <ul>
                     <li id="financialTracker"><a href="#">Market Tracker</a></li>
                     <li id="currentPrices"><a href="#">Current Prices</a></li>
                 </ul>
             </li>
-            <li>
+            <li class="active">
                 <h3><span></span>Loans</h3>
                 <ul>
                     <li id="mortgage"><a href="#">Mortgage</a></li>

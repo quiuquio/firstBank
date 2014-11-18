@@ -8,7 +8,7 @@
     </h1>
     <div id="sessionInfo">
         <p>User: <a href="#" id="userSettings"><?php echo '$Username';?></a></p>
-        <p>Login date: <?php echo '$UserLoginTime';?></p>
+        <p>Login date: <?php echo getLastLogin();?></p>
         <p>Status: <?php echo '$ServiceStatus';?></p>
         <form id="logoutForm" name="logoutForm" method="POST" action="index.php">
             <input type="submit" name="logout" value="logout">
