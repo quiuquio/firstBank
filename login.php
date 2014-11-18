@@ -87,8 +87,7 @@ class LoginPage{
 
     */
     public function showPageLoginForm2(){
-        //Call your fuction here JJ!!!!
-        $posString = "4-6-7";
+        $posString = gen2ndPwPos();
         $selectedIpunt = explode("-", $posString);
         $vals = [];
         $disables = [];
