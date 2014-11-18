@@ -28,6 +28,14 @@ else{
                 setTitle("Select Account");
                 require('selectAccount.php');
                 break;
+            case 'accountSummary':
+                setTitle("Account Summary");
+                require('accountSummary.php');
+                break;
+            case 'accountDetails':
+                setTitle("Account Details");
+                require('accountDetails.php');
+                break;
             case 'userSettings':
                 setTitle("User Settings");
                 require('userSettings.php');
@@ -37,8 +45,12 @@ else{
                 require('makePayments.php');
                 break;  
             case 'billPayment':
-                setTitle("Billl Payments");
+                setTitle("Bill Payments");
                 require('billPayment.php');
+                break;
+            case '3rdPartyTransfer':
+                setTitle("Third Party Transfer");
+                require('thirdPartyTransfer.php');
                 break;
             case 'recurringPayments':
                 setTitle("");
