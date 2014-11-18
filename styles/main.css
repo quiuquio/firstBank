@@ -209,3 +209,7 @@ iframe {
     font-size: 8pt;
     color: #000000
 }
+#logoutForm{
+    float:right;
+    margin-right: 40%;
+}
