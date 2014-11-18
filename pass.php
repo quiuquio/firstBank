@@ -105,7 +105,22 @@ function gen2ndpwPos() {
 		$pos[$i] = $next;
 	}
 	sort($pos);
+	$_SESSION["2ndpwPos"] = $pos;
 	return implode("-", $pos);
+}
+
+function check2ndpw($inpw) {
+	$pwarray = array('.', '.', '.', '.', '.', '.', '.', '.');
+	$pos = $_SESSION["2ndpwPos"];
+	var_dump($pos);
+	$inpw = explode("-", $inpw);
+	for ($i=0; $i < count($pos); $i++) { 
+		$pwarray[$pos[$i]] = $inpw[$i];
+	}
+	$inpw = implode('', $pwarray);
+	$inpw = '/'.$inpw.'/';
+	echo "$inpw";
+	return preg_match($inpw, $_SESSION["pw2"]);
 }
 
 ?>

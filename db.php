@@ -78,7 +78,18 @@ function loginRecord($username, $uid, $method, $success) {
 	}
 	return FALSE;
 }
-
+/* TODO:
+function getLastLogin($uid) {
+	if (dbconnect($con)) {
+		$sqlstr = "SELECT time FROM login_records ORDER BY time DESC";
+		$rows = dbquery($sqlstr);
+		$lastLogin = $rows[0]["time"];
+		dbclose($con);
+		return $lastLogin;
+	}
+	return NULL;
+}
+*/
 function dbGetPrimeRates(&$curPR) {
 	if (dbconnect($con)) {
 		$sqlstr = "SELECT * FROM Prime_Rate ORDER BY eff_date DESC";

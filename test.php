@@ -16,6 +16,7 @@ else {
 	$key = NULL;
 }
 */
+session_start();
 require_once('session.php');
 
 
@@ -85,7 +86,19 @@ mTransfer("234567890000", "23456789002", 100, "testing", NULL, FALSE);
 loginRecord("rob", NULL, "1st_pw", 0);
 
 echo gen2ndpwPos();
+$str = "a-b-c";
+$str = explode('-', $str);
+var_dump($str);
 
+$pwarray = array('.', '.', '.', '.', '.', '.', '.', '.');
+echo implode('', $pwarray);
+
+$_SESSION["2ndpwPos"] = array(1, 3, 7);
+$_SESSION["pw2"] = "qwertyui";
+if (check2ndpw("w-r-i")) {
+
+	echo "<p>ok</p>";
+}
 
 ?>
 
