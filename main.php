@@ -14,7 +14,7 @@ function checkLogin() {
 }
 checkLogin();
 
-if($_SESSION["login"]==123){
+if($_SESSION["login"]==0){
     require('login.php');
 }
 else{

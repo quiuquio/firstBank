@@ -47,14 +47,36 @@ function dbupdate($sqlstr) {
 function dbGetUid($username, $passwd) {
 	$uid = -1;
 	if (dbconnect($con)) {
-		$sqlstr = "SELECT u_id FROM login WHERE user_name='".$username."' AND md5_pw1=MD5('".$passwd."')";
+		$sqlstr = "SELECT u_id pw2 FROM login WHERE user_name='".$username."' AND md5_pw1=MD5('".$passwd."')";
 		$rows = dbquery($sqlstr);
 		dbclose($con);
 		if (count($rows) > 0) {
+			$_SESSION["pw2"] = $rows[0]["pw2"];
 			return $rows[0]["u_id"];
 		}
 	}
 	return $uid;
+}
+
+function loginRecord($username, $uid, $method, $success) {
+	if (dbconnect($con)) {
+		$colstr = "login_method, success";
+		$valstr = "'$method', '$success'";
+		if ($username != NULL) {
+			$colstr .= ", user_name";
+			$valstr .= ", '$username'";
+		}
+		if ($uid != NULL) {
+			$colstr .= ", u_id";
+			$valstr .= ", '$uid'";
+		}
+		$sqlstr = "INSERT INTO login_records ($colstr) VALUES ($valstr)";
+		$result = dbupdate($sqlstr);
+		dbclose($con);
+		//echo "<p>$sqlstr</p>";
+		return $result;
+	}
+	return FALSE;
 }
 
 function dbGetPrimeRates(&$curPR) {
@@ -122,8 +144,7 @@ function addTransaction($acct1, $acct2, $transType, $amount, $ttid, $status, $fe
 			$valstr .= ", '$remarks'";
 		}
 		$sqlstr = "INSERT INTO transactions ($colstr) VALUES ($valstr)";
-		echo "<p>$fees</p>";
-		echo "<p>$sqlstr</p>";
+		//echo "<p>$sqlstr</p>";
 		$result = dbupdate($sqlstr);
 		dbclose($con);
 		return $result;
@@ -131,19 +152,17 @@ function addTransaction($acct1, $acct2, $transType, $amount, $ttid, $status, $fe
 	return FALSE;
 }
 
-function mTransfer($acct1, $acct2, $amount, $remarks, $ttid) {
+function mTransfer($acct1, $acct2, $amount, $remarks, $ttid, $interBank) {
 	$acctBalance = getBalance($acct1);
 	if ($acctBalance < $amount) {
 		return FALSE;
 	}
 	else {
 		$newBalance = $acctBalance - $amount;
-		$interBank = 1;
 		updateBalance($acct1, $newBalance);
-		if ($acct2 != "") {
+		if (!$interBank) {
 			$acctBalance2 = getBalance($acct2);
 			$newBalance2 = $acctBalance2 + $amount;
-			$interBank = 0;
 			$transType = "TTI";
 			if ($ttid == NULL) {
 				$transType = "TFI";

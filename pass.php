@@ -92,5 +92,21 @@ class RSA
 	}
 }
 
+function gen2ndpwPos() {
+	$pos = array(-1, -1, -1);
+	if (rand(0,1)) {
+		array_push($pos, -1);
+	}
+	for ($i=0; $i < count($pos); $i++) { 
+		$next = rand(0, 7);
+		while (in_array($next, $pos)) {
+			$next = rand(0, 7);
+		}
+		$pos[$i] = $next;
+	}
+	sort($pos);
+	return implode("-", $pos);
+}
+
 ?>
 
