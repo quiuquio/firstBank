@@ -40,10 +40,12 @@ if(isset($_POST['user_name']) && !empty($_POST['user_name'])){
             $uid = dbGetUid($username, $passwd);
             if ($uid > 0) {
                 $_SESSION["uid"] = $uid;
+                loginRecord($username, $uid, "1st_pw", 1);
                 $p->showPageLoginForm2();
             }
             else {
                 echo "<p>Login failed. Please try again.</p>";
+                loginRecord($username, NULL, "1st_pw", 0);
                 $p->showPageLoginForm();
                 //$p->showPageLoginForm2();
             }

@@ -47,7 +47,7 @@ function dbupdate($sqlstr) {
 function dbGetUid($username, $passwd) {
 	$uid = -1;
 	if (dbconnect($con)) {
-		$sqlstr = "SELECT u_id pw2 FROM login WHERE user_name='".$username."' AND md5_pw1=MD5('".$passwd."')";
+		$sqlstr = "SELECT u_id, pw2 FROM login WHERE user_name='".$username."' AND md5_pw1=MD5('".$passwd."')";
 		$rows = dbquery($sqlstr);
 		dbclose($con);
 		if (count($rows) > 0) {
@@ -78,10 +78,10 @@ function loginRecord($username, $uid, $method, $success) {
 	}
 	return FALSE;
 }
-/* TODO:
+
 function getLastLogin($uid) {
 	if (dbconnect($con)) {
-		$sqlstr = "SELECT time FROM login_records ORDER BY time DESC";
+		$sqlstr = "SELECT time FROM login_records WHERE u_id='$uid' AND success='1' ORDER BY time DESC";
 		$rows = dbquery($sqlstr);
 		$lastLogin = $rows[0]["time"];
 		dbclose($con);
@@ -89,7 +89,7 @@ function getLastLogin($uid) {
 	}
 	return NULL;
 }
-*/
+
 function dbGetPrimeRates(&$curPR) {
 	if (dbconnect($con)) {
 		$sqlstr = "SELECT * FROM Prime_Rate ORDER BY eff_date DESC";

@@ -83,7 +83,7 @@ var_dump($prs);
 
 //echo getBalance("234567890000");
 mTransfer("234567890000", "23456789002", 100, "testing", NULL, FALSE);
-loginRecord("rob", NULL, "1st_pw", 0);
+loginRecord(NULL, 1, "1st_pw", 1);
 
 echo gen2ndpwPos();
 $str = "a-b-c";
@@ -99,6 +99,7 @@ if (check2ndpw("w-r-i")) {
 
 	echo "<p>ok</p>";
 }
+echo getLastLogin(1);
 
 ?>
 
