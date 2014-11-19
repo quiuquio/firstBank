@@ -16,7 +16,6 @@ else {
 	$key = NULL;
 }
 */
-session_start();
 require_once('session.php');
 
 
@@ -78,12 +77,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <?php
 require_once('db.php');
-$prs = dbGetPrimeRates();
+$prs = $db->getPrimeRates($cprs);
 var_dump($prs);
+var_dump($cprs);
 
 //echo getBalance("234567890000");
-mTransfer("234567890000", "23456789002", 100, "testing", NULL, FALSE);
-loginRecord(NULL, 1, "2st_pw", 1);
+$db->mTransfer("234567890000", "23456789002", 100, "testing", NULL, FALSE);
+$db->loginRecord(NULL, 1, "2st_pw", 1);
 
 echo gen2ndpwPos();
 $str = "a-b-c";
@@ -99,18 +99,13 @@ if (check2ndpw("w-r-i")) {
 
 	echo "<p>ok</p>";
 }
-echo getLastLogin(1);
+echo $db->getLastLogin(1);
 
 $_SESSION["login"] = 1;
 $_SESSION["uid"] = 1;
-setUserSession();
-var_dump($_SESSION["accts"]);
+$db->setUserSession();
 echo "<p></p>";
-var_dump($_SESSION["acctTansactions"]);
-echo "<p></p>";
-var_dump($_SESSION["addr"]);
-echo "<p></p>";
-var_dump($_SESSION["contacts"]);
+var_dump($_SESSION);
 
 
 ?>

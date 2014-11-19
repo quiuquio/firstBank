@@ -135,8 +135,25 @@ class DB
 				$rows = $this->dbquery($sqlstr);
 				$_SESSION["contacts"] = $rows;
 
-				$this->dbclose($con);
+				// get user details
+				$colstr = "first_name, last_name, title, YEAR(NOW())-YEAR(dob) AS age";
+				$sqlstr = "SELECT $colstr FROM customer WHERE u_id='$uid'";
+				$row = $this->dbquery($sqlstr);
+				$_SESSION["firstn"] = $row[0]["first_name"];
+				$_SESSION["lastn"] = $row[0]["last_name"];
+				$_SESSION["title"] = $row[0]["title"];
+				$_SESSION["age"] = $row[0]["age"];
 
+				// get total balance
+				$sqlstr = "SELECT SUM(balance) AS tbalance FROM user_acct WHERE u_id='$uid'";
+				$row = $this->dbquery($sqlstr);
+				$_SESSION["tbalance"] = $row[0]["tbalance"];
+
+				// get targeted ad
+				$this->targetAd();
+
+				$this->dbclose($con);
+/*
 				//get transactions for each account
 				$acctTansactions = array();
 				for ($i=0; $i < count($accts); $i++) { 
@@ -144,7 +161,7 @@ class DB
 					$acctTansactions[$acctNum] = $this->getTransactions($acctNum);
 				}
 				$_SESSION["acctTansactions"] = $acctTansactions;
-				
+*/				
 				
 				return TRUE;
 			}
@@ -153,11 +170,11 @@ class DB
 		return FALSE;
 	}
 
-	public function dbGetPrimeRates(&$curPR) {
+	public function getPrimeRates(&$curPR) {
 		if ($this->dbconnect($con)) {
 			$sqlstr = "SELECT * FROM Prime_Rate ORDER BY eff_date DESC";
 			$rows = $this->dbquery($sqlstr);
-			$curPR = $rows[0]["rate"];
+			$curPR = $rows[0]["HS_prime_rate"];
 			$this->dbclose($con);
 			return $rows;
 		}
@@ -257,10 +274,32 @@ class DB
 		return FALSE;
 	}
 
+	private function targetAd() {
+		$vip = "Join FirstBank VIP clud today!";
+		$masterprogram = "HKBU Master 2015-2016 open for register now.";
+		$elderlytrip = "One day trip to Zhuhai $288.";
+		$apartment = "180 degree sea view apartment";
+		$defaultAd = "FirstBank, your first choice";
+
+		$age = $_SESSION["age"];
+		$balance = $_SESSION["tbalance"];
+
+		$tad = array($defaultAd);
+		if ($balance > 100000) {
+			array_push($tad, $vip);
+		}
+		if ($age > 20 && $age < 30) {
+			array_push($tad, $masterprogram);
+		}
+		if ($age >= 30) {
+			array_push($tad, $apartment);
+		}
+		if ($age >= 60) {
+			array_push($tad, $elderlytrip);
+		}
+		$_SESSION["tad"] = $tad;
+	}
+
 }
-
-
-
-
 
 ?>
