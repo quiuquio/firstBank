@@ -81,8 +81,14 @@ $prs = $db->getPrimeRates($cprs);
 var_dump($prs);
 var_dump($cprs);
 
+$_SESSION["login"] = 1;
+$_SESSION["uid"] = 1;
+
+$db->setUserSession();
+
 //echo getBalance("234567890000");
 $db->mTransfer("234567890000", "23456789002", 100, "testing", NULL, FALSE);
+
 $db->loginRecord(NULL, 1, "2st_pw", 1);
 
 echo gen2ndpwPos();
@@ -101,9 +107,8 @@ if (check2ndpw("w-r-i")) {
 }
 echo $db->getLastLogin(1);
 
-$_SESSION["login"] = 1;
-$_SESSION["uid"] = 1;
-$db->setUserSession();
+
+
 echo "<p></p>";
 var_dump($_SESSION);
 

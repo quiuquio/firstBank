@@ -107,7 +107,8 @@ class DB
 		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1) {
 			$uid = $_SESSION["uid"];
 			if ($this->dbconnect($con)) {
-				$sqlstr = "SELECT time FROM login_records WHERE u_id='$uid' AND success='1' AND (method='2st_pw' OR method='facial') ORDER BY time DESC";
+				$sqlstr = "SELECT time FROM login_records WHERE u_id='$uid' AND success='1' AND (login_method='2st_pw' OR login_method='facial') ORDER BY time DESC";
+				//echo "<p>$sqlstr</p>";
 				$rows = $this->dbquery($sqlstr);
 				$lastLogin = $rows[0]["time"];
 				$this->dbclose($con);
@@ -123,8 +124,12 @@ class DB
 			$uid = $_SESSION["uid"];
 			if ($this->dbconnect($con)) {
 				// get accounts
-				$sqlstr = "SELECT acct_no, acct_type, balance FROM user_acct WHERE u_id='$uid'";
-				$accts = $this->dbquery($sqlstr);
+				$sqlstr = "SELECT acct_no, acct_type FROM user_acct WHERE u_id='$uid'";
+				$rows = $this->dbquery($sqlstr);
+				$accts = array();
+				for ($i=0; $i < count($rows); $i++) { 
+					$accts[$rows[$i]["acct_no"]] = $rows[$i]["acct_type"];
+				}
 				$_SESSION["accts"] = $accts;
 
 				// get user contact
@@ -235,7 +240,7 @@ class DB
 				$valstr .= ", '$remarks'";
 			}
 			$sqlstr = "INSERT INTO transactions ($colstr) VALUES ($valstr)";
-			//echo "<p>$sqlstr</p>";
+			echo "<p>$sqlstr</p>";
 			$result = $this->dbupdate($sqlstr);
 			$this->dbclose($con);
 			return $result;
@@ -243,9 +248,10 @@ class DB
 		return FALSE;
 	}
 
-	public function mTransfer($acct2, $amount, $remarks, $ttid, $interBank) {
-		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1) {
-			$acct1 = $_SESSION["uid"];
+	public function mTransfer($acct1, $acct2, $amount, $remarks, $ttid, $interBank) {
+
+		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1 && 
+			isset($_SESSION["accts"]) && array_key_exists($acct1, $_SESSION["accts"])) {
 			$acctBalance = $this->getBalance($acct1);
 			if ($acctBalance < $amount) {
 				return FALSE;
@@ -298,6 +304,19 @@ class DB
 			array_push($tad, $elderlytrip);
 		}
 		$_SESSION["tad"] = $tad;
+	}
+
+	public function checkTansactions()
+	{
+		if ($this->dbconnect($con)) {
+			$sqlstr = "SELECT check_time, actual_amount FROM transaction_check ORDER BY check_time DESC";
+			$rows = $this->dbquery($sqlstr);
+			$lastChkTime = $rows[0]["check_time"];
+			$lastAmount = $rows[0]["actual_amount"];
+			$this->dbclose($con);
+			return TRUE;
+		}
+		return FALSE;
 	}
 
 }
