@@ -18,7 +18,6 @@
 </script>   
 
 <?php
-require_once('db.php');
 
 $p = new LoginPage();
 
@@ -37,15 +36,15 @@ if(isset($_POST['user_name']) && !empty($_POST['user_name'])){
             $p->showPageLoginForm();
         }
         else {
-            $uid = dbGetUid($username, $passwd);
+            $uid = $db->getUid($username, $passwd);
             if ($uid > 0) {
                 $_SESSION["uid"] = $uid;
-                loginRecord($username, $uid, "1st_pw", 1);
+                $db->loginRecord($username, $uid, "1st_pw", 1);
                 $p->showPageLoginForm2();
             }
             else {
                 echo "<p>Login failed. Please try again.</p>";
-                loginRecord($username, NULL, "1st_pw", 0);
+                $db->loginRecord($username, NULL, "1st_pw", 0);
                 $p->showPageLoginForm();
                 //$p->showPageLoginForm2();
             }
