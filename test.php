@@ -107,6 +107,10 @@ if (check2ndpw("w-r-i")) {
 }
 echo $db->getLastLogin(1);
 
+echo "<p></p>";
+
+$db->checkTransactions();
+
 
 
 echo "<p></p>";

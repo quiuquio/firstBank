@@ -249,9 +249,10 @@ class DB
 	}
 
 	public function mTransfer($acct1, $acct2, $amount, $remarks, $ttid, $interBank) {
-
+		// will perform transfer only if acct1 belongs to current user.
 		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1 && 
 			isset($_SESSION["accts"]) && array_key_exists($acct1, $_SESSION["accts"])) {
+
 			$acctBalance = $this->getBalance($acct1);
 			if ($acctBalance < $amount) {
 				return FALSE;
@@ -306,15 +307,42 @@ class DB
 		$_SESSION["tad"] = $tad;
 	}
 
-	public function checkTansactions()
+	public function checkTransactions()
 	{
 		if ($this->dbconnect($con)) {
+			// get last transaction check for reference.
 			$sqlstr = "SELECT check_time, actual_amount FROM transaction_check ORDER BY check_time DESC";
 			$rows = $this->dbquery($sqlstr);
 			$lastChkTime = $rows[0]["check_time"];
 			$lastAmount = $rows[0]["actual_amount"];
+
+			// get total in coming amount
+			$inTransactionType = "'TFI', 'TTI', 'RCD'"; /* TransFer In, Timed Transfer In, Received Cash Deposit */
+			$sqlstr = "SELECT SUM(amount) AS sumAmount FROM transactions WHERE transaction_type IN ($inTransactionType)";
+			$row = $this->dbquery($sqlstr);
+			$inSum = $row[0]["sumAmount"];
+
+			// get total out going amount
+			$outTransactionType = "'TFO', 'TTO', 'CWD'"; /* TransFer Out, Timed Transfer Out, Cash WithDraw */
+			$sqlstr = "SELECT SUM(amount) AS sumAmount FROM transactions WHERE transaction_type IN ($outTransactionType)";
+			$row = $this->dbquery($sqlstr);
+			$outSum = $row[0]["sumAmount"];
+
+			// get current balance amount
+			$sqlstr = "SELECT SUM(balance) AS sumBalance FROM user_acct";
+			$row = $this->dbquery($sqlstr);
+			$sumBalance = $row[0]["sumBalance"];
+
+			// checking...
+			$checkOK = (($lastAmount + $inSum - $outSum) == $sumBalance);
+			//echo "(($lastAmount + $inSum - $outSum) == $sumBalance) : $checkOK";
+
+			// save check record
+			$sqlstr = "INSERT INTO transaction_check (total_in, total_out, actual_amount, check_ok) VALUES ($inSum, $outSum, $sumBalance, $checkOK)";
+			$result = $this->dbupdate($sqlstr);
+
 			$this->dbclose($con);
-			return TRUE;
+			return $result;
 		}
 		return FALSE;
 	}
