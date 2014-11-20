@@ -12,19 +12,20 @@
                     <th class="currency">Currency/ Unit</th>
                     <th class="balance right">Account Balance (DR=Debit)</th>
                 </tr>
-                   <tr class="lvl2 title">
-                            <td colspan="2"><b><?php echo '$selected_account.type'?></b></td>
-                    <td><?php echo '$selected_account.number'?></td>
-                    <td></td>
-                    <td class="right"></td>
-                   </tr>
                    <?php
                     $retval = '';
-                    foreach ($_SESSION['accts'] as $key => $value) {
-                        # code...
+                    foreach ($_SESSION['accts'] as $value) {
+                        ?>
+                            <tr class="lvl2 title">
+                                <td colspan="2"><b><?php echo "{$value['acct_type']}";?></b></td>
+                                <td><?php echo "{$value['acct_number']}";?></td>
+                                <td> HKD </td>
+                                <td> <?php echo "{$value['balance']}";?></td>
+                           </tr>
+                        <?php
                     }
                    ?>
-                    <tr class="lvl2">
+                <!--<tr class="lvl2">
                         <td class="indent">&nbsp;</td>
                         <td>
                                          - HKD Savings
@@ -34,7 +35,7 @@
                                    <?php echo '$selected_account.savings'?>
                         </td>
                 </tr>
-                            <tr class="lvl2 last">
+                <tr class="lvl2 last">
                         <td class="indent">&nbsp;</td>
                         <td>
                                        - HKD Current
@@ -43,7 +44,7 @@
                     <td class="right">
                                    <?php echo '$selected_account.current'?>
                         </td>
-                </tr>
+                </tr>-->
                                 </tbody></table>
                         </div>
                         <div class="bottom"></div>
