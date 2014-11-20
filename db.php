@@ -14,7 +14,7 @@ class DB
 	public function __construct() {
 		$this->dbhost = "localhost";
 		$this->dbuser = "root";
-		$this->dbpw = "";
+		$this->dbpw = "24680";
 		$this->dbname = "Ebanking";
 	}
 
@@ -195,15 +195,15 @@ class DB
 	public function getBalance($acctNum) {
 		$balance = -1;
 
-		if ($this->dbconnect($con)) {
-			$sqlstr = "SELECT balance FROM user_acct WHERE acct_no='$acctNum'";
-			$rows = $this->dbquery($sqlstr);
-			$this->dbclose($con);
-			if (count($rows) > 0) {
-				$balance = $rows[0]["balance"];
+			if ($this->dbconnect($con)) {
+				$sqlstr = "SELECT balance FROM user_acct WHERE acct_no='$acctNum'";
+				$rows = $this->dbquery($sqlstr);
+				$this->dbclose($con);
+				if (count($rows) > 0) {
+					$balance = $rows[0]["balance"];
+				}
 			}
-		}
-
+			
 		return $balance;
 	}
 
