@@ -77,6 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <?php
 require_once('db.php');
+
 $prs = $db->getPrimeRates($cprs);
 var_dump($prs);
 var_dump($cprs);
@@ -111,12 +112,12 @@ echo "<p></p>";
 
 //$db->checkTransactions();
 //$db->addTimedTransfer("234567890000", "23456789002", "", 100, "2014-11-20", "fixed", "", 0, 1);
-var_dump($db->getTimedTransfer());
-
+//var_dump($db->getTimedTransfer());
+//$db->performTTransfer();
 
 
 echo "<p></p>";
-var_dump($_SESSION);
+//var_dump($_SESSION);
 
 
 ?>

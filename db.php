@@ -179,12 +179,15 @@ class DB
 		return NULL;
 	}
 
-	private function getTransactions($acctNum) {
-		if ($this->dbconnect($con)) {
-			$sqlstr = "SELECT * FROM transactions WHERE account_1_num='$acctNum'";
-			$rows = $this->dbquery($sqlstr);
-			$this->dbclose($con);
-			return $rows;
+	public function getTransactions($acctNum) {
+		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1 && $this->hasAcct($acctNum)) {
+			if ($this->dbconnect($con)) {
+				$sqlstr = "SELECT * FROM transactions WHERE account_1_num='$acctNum'";
+				$rows = $this->dbquery($sqlstr);
+				$this->dbclose($con);
+				return $rows;
+			}
+			return NULL;
 		}
 		return NULL;
 	}
@@ -192,19 +195,15 @@ class DB
 	public function getBalance($acctNum) {
 		$balance = -1;
 
-		// will return account balance only if acctNum belongs to current user.
-		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1 && 
-			isset($_SESSION["accts"]) && array_key_exists($acctNum, $_SESSION["accts"])) {
-		
-			if ($this->dbconnect($con)) {
-				$sqlstr = "SELECT balance FROM user_acct WHERE acct_no='$acctNum'";
-				$rows = $this->dbquery($sqlstr);
-				$this->dbclose($con);
-				if (count($rows) > 0) {
-					$balance = $rows[0]["balance"];
-				}
+		if ($this->dbconnect($con)) {
+			$sqlstr = "SELECT balance FROM user_acct WHERE acct_no='$acctNum'";
+			$rows = $this->dbquery($sqlstr);
+			$this->dbclose($con);
+			if (count($rows) > 0) {
+				$balance = $rows[0]["balance"];
 			}
 		}
+
 		return $balance;
 	}
 
@@ -212,6 +211,7 @@ class DB
 		if ($this->dbconnect($con)) {
 			$sqlstr = "UPDATE user_acct SET balance='$amount' WHERE acct_no='$acctNum'";
 			$result = $this->dbupdate($sqlstr);
+			echo "<p>$sqlstr</p>";
 			$this->dbclose($con);
 			return $result;
 		}
@@ -249,8 +249,7 @@ class DB
 
 	public function mTransfer($acct1, $acct2, $amount, $remarks, $interBank) {
 		// will perform transfer only if acct1 belongs to current user.
-		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1 && 
-			isset($_SESSION["accts"]) && array_key_exists($acct1, $_SESSION["accts"])) {
+		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1 && $this->hasAcct($acct1)) {
 
 			$acctBalance = $this->getBalance($acct1);
 			if ($acctBalance < $amount) {
@@ -264,20 +263,20 @@ class DB
 					$newBalance2 = $acctBalance2 + $amount;
 					$transType = "TFI";
 					$this->updateBalance($acct2, $newBalance2);
-					$this->addTransaction($acct2, $acct1, $transType, $amount, $ttid, "settled", "0", $remarks, $newBalance2, $interBank);
+					$this->addTransaction($acct2, $acct1, $transType, $amount, NULL, "settled", "0", $remarks, $newBalance2, $interBank);
 				}
 				$transType = "TFO";
-				$this->addTransaction($acct1, $acct2, $transType, $amount, $ttid, "settled", "0", $remarks, $newBalance, $interBank);
+				$this->addTransaction($acct1, $acct2, $transType, $amount, NULL, "settled", "0", $remarks, $newBalance, $interBank);
 				return TRUE;
 			}
 		}
 		return FALSE;
 	}
 
+	
 	public function addTimedTransfer($acct1, $acct2, $tType, $amount, $startTime, $interval, $remarks, $interBank, $active) {
 		// will add timed transaction only if acct1 belongs to current user.
-		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1 && 
-			isset($_SESSION["accts"]) && array_key_exists($acct1, $_SESSION["accts"])) {
+		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1 && $this->hasAcct($acct1)) {
 			if ($this->dbconnect($con)) {
 				$colstr = "from_account, t_type, t_amount, starting_time, t_interval, interbank, active";
 				$valstr = "'$acct1', '$tType', '$amount', '$startTime', '$interval', '$interBank', '$active'";
@@ -300,13 +299,13 @@ class DB
 		return FALSE;
 	}
 
-	public function getTimedTransfer() {
+	private function getTimedTransfer() {
 		if ($this->dbconnect($con)) {
-			$colstr = "from_account, to_account, t_amount, interbank, remark";
+			$colstr = "t_id, from_account, to_account, t_amount, interbank, remark";
 			$tablename = "timed_transfers";
 			$condstr = "active=1 AND t_interval='fixed' AND DATE(starting_time)=DATE(NOW())";
 			$sqlstr = "SELECT $colstr FROM $tablename WHERE $condstr";
-			echo "<p>$sqlstr</p>";
+			//echo "<p>$sqlstr</p>";
 			$rows = $this->dbquery($sqlstr);
 
 			$this->dbclose($con);
@@ -315,8 +314,40 @@ class DB
 		return NULL;
 	}
 
-	public function performTTransfer() {
+	// a private funcion for timed transfer
+	private function tTransfer($acct1, $acct2, $amount, $remarks, $interBank, $ttid) {
+			$acctBalance = $this->getBalance($acct1);
+			if ($acctBalance < $amount) {
+				return FALSE;
+			}
+			else {
+				$newBalance = $acctBalance - $amount;
+				$this->updateBalance($acct1, $newBalance);
+				if (!$interBank) {
+					$acctBalance2 = $this->getBalance($acct2);
+					$newBalance2 = $acctBalance2 + $amount;
+					echo "<p>$acctBalance2 : $amount</p>";
+					$transType = "TTI";
+					$this->updateBalance($acct2, $newBalance2);
+					$this->addTransaction($acct2, $acct1, $transType, $amount, $ttid, "settled", "0", $remarks, $newBalance2, $interBank);
+				}
+				$transType = "TTO";
+				$this->addTransaction($acct1, $acct2, $transType, $amount, $ttid, "settled", "0", $remarks, $newBalance, $interBank);
+				return TRUE;
+			}
+	}
 
+	public function performTTransfer() {
+		$timedTs = $this->getTimedTransfer();
+		foreach ($timedTs as $tt) {
+			$acct1 = $tt["from_account"];
+			$acct2 = $tt["to_account"];
+			$amount = $tt["t_amount"];
+			$remarks = $tt["remark"];
+			$interBank = $tt["interbank"];
+			$ttid = $tt["t_id"];
+			$this->tTransfer($acct1, $acct2, $amount, $remarks, $interBank, $ttid);
+		}
 	}
 
 	private function targetAd() {
@@ -383,6 +414,19 @@ class DB
 			return $result;
 		}
 		return FALSE;
+	}
+
+	private function hasAcct($acctNum) {
+		$has = FALSE;
+		if (isset($_SESSION["accts"])) {
+			$accts = $_SESSION["accts"];
+			for ($i=0; $i < count($accts); $i++) { 
+				if ($accts[$i]["acct_no"] == $acctNum) {
+					$has = TRUE;
+				}
+			}
+		}
+		return $has;
 	}
 
 }
