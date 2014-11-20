@@ -18,7 +18,7 @@
                         ?>
                             <tr class="lvl2 title">
                                 <td colspan="2"><b><?php echo "{$value['acct_type']}";?></b></td>
-                                <td><?php echo "{$value['acct_number']}";?></td>
+                                <td><?php echo "{$value['acct_no']}";?></td>
                                 <td> HKD </td>
                                 <td> <?php echo "{$value['balance']}";?></td>
                            </tr>
