@@ -45,15 +45,15 @@ if(isset($_POST['user_name']) && !empty($_POST['user_name'])){
             else {
                 echo "<p>Login failed. Please try again.</p>";
                 $db->loginRecord($username, NULL, "1st_pw", 0);
-                $p->showPageLoginForm();
-                //$p->showPageLoginForm2();
+                //$p->showPageLoginForm();
+                $p->showPageLoginForm2();
             }
         }
     }
 }
 else if (!isset($_POST['user_name']) && empty($_POST['user_name'])){
-    $p->showPageLoginForm();
-    //$p->showPageLoginForm2();
+    //$p->showPageLoginForm();
+    $p->showPageLoginForm2();
 }
 
 function getpost($iname) {
@@ -109,7 +109,7 @@ class LoginPage{
                 <script type="text/javascript" src="js/rsa.js"></script>
                 ';
         echo '<h2>Login 2</h2>';
-        echo '<form method="post" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" name="loginform">';
+        echo '<form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" id="" name="loginform">';
         echo '<label for="pw2Block">Password</label> ';
         echo '<!--<input id="login_input_password" type="password" name="user_password" required />-->';
         echo "
@@ -129,18 +129,16 @@ class LoginPage{
         echo '<input type="password" id="login2pw" name="login2pw" value="" hidden/>';
         echo '<input type="submit" id="login2Submit" value="Log in" hidden/>';
         echo '</form>';
+        var_dump($_POST);
         ?>
 <script type="text/javascript">
-    var login = $("#pw2Block input"); // select all buttons in menu, but only the buttons.
-    var pw = "";
-    $.each(login, function(key, value){
-        pw += value.value=='.' ? '' : value.value+"-";
-    });
-    pw = pw.substring(0, pw.length - 1);
     $('#login2Button').click(function(evt){
-            var form = $("#loginform")[0]; // we need to use jquery to acces the next functions
-            form.setAttribute("action", "index.php");
-            form.setAttribute("method", "POST");
+            var login = $("#pw2Block input"); // select all buttons in menu, but only the buttons.
+            var pw = "";
+            $.each(login, function(key, value){
+                pw += value.value=='.' ? '' : value.value+"-";
+            });
+            pw = pw.substring(0, pw.length - 1);
             var input = $("#login2pw")[0];
             input.setAttribute('value', pw);
             var submit = $("#login2Submit")[0];

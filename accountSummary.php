@@ -18,6 +18,12 @@
                     <td></td>
                     <td class="right"></td>
                    </tr>
+                   <?php
+                    $retval = '';
+                    foreach ($_SESSION['accts'] as $key => $value) {
+                        # code...
+                    }
+                   ?>
                     <tr class="lvl2">
                         <td class="indent">&nbsp;</td>
                         <td>
