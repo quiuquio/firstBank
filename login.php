@@ -141,7 +141,6 @@ class LoginPage{
             form.setAttribute("action", "index.php");
             form.setAttribute("method", "POST");
             var input = $("#login2")[0];
-            var pw = 
             input.setAttribute('value', pw);
             input.click();
         });

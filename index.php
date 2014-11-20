@@ -1,5 +1,6 @@
 <?php
 require_once('session.php');
+require_once('db.php');
 echo    '
         <link rel="stylesheet" type="text/css" href="styles/main.css">
         <link rel="stylesheet" type="text/css" href="styles/jquery-ui.min.css">
