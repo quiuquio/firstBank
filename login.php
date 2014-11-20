@@ -125,8 +125,9 @@ class LoginPage{
                 </div>
             ";
         echo '<button id="login2Button">Log in</button>';    
-        echo '<input id="login2" name="posString" hidden/>';
-        echo '<input type="submit" id="login2" name="login" value="Log in" hidden/>';
+        echo '<input id="login2poss" name="posString" hidden/>';
+        echo '<input type="password" id="login2pw" name="login2pw" value="" hidden/>';
+        echo '<input type="submit" id="login2Submit" value="Log in" hidden/>';
         echo '</form>';
         ?>
 <script type="text/javascript">
@@ -140,10 +141,10 @@ class LoginPage{
             var form = $("#loginform")[0]; // we need to use jquery to acces the next functions
             form.setAttribute("action", "index.php");
             form.setAttribute("method", "POST");
-            var input = $("#login2")[0];
-            var pw = 
+            var input = $("#login2pw")[0];
             input.setAttribute('value', pw);
-            input.click();
+            var submit = $("#login2Submit")[0];
+            submit.click();
         });
 </script>
         <?php
