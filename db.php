@@ -211,7 +211,7 @@ class DB
 		if ($this->dbconnect($con)) {
 			$sqlstr = "UPDATE user_acct SET balance='$amount' WHERE acct_no='$acctNum'";
 			$result = $this->dbupdate($sqlstr);
-			echo "<p>$sqlstr</p>";
+			//echo "<p>$sqlstr</p>";
 			$this->dbclose($con);
 			return $result;
 		}
@@ -326,7 +326,7 @@ class DB
 				if (!$interBank) {
 					$acctBalance2 = $this->getBalance($acct2);
 					$newBalance2 = $acctBalance2 + $amount;
-					echo "<p>$acctBalance2 : $amount</p>";
+					//echo "<p>$acctBalance2 : $amount</p>";
 					$transType = "TTI";
 					$this->updateBalance($acct2, $newBalance2);
 					$this->addTransaction($acct2, $acct1, $transType, $amount, $ttid, "settled", "0", $remarks, $newBalance2, $interBank);
@@ -427,6 +427,46 @@ class DB
 			}
 		}
 		return $has;
+	}
+
+	public function addLoanRecord($address, $title, $tel, $mobile, $email) {
+		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1) {
+			$uid = $_SESSION["uid"];
+			if ($this->dbconnect($con)) {
+				$clerkid = rand(1,4);
+
+				$colstr = "address, clerk_id, u_id";
+				$valstr = "'$address', '$clerkid', '$uid'";
+				if ($title != NULL) {
+					$colstr .= ", title";
+					$valstr .= ", '$title'";
+				}
+				if ($tel != NULL) {
+					$colstr .= ", tel_no";
+					$valstr .= ", '$tel'";
+				}
+				if ($mobile != NULL) {
+					$colstr .= ", mobile";
+					$valstr .= ", '$mobile'";
+				}
+				if ($email != NULL) {
+					$colstr .= ", e_mail";
+					$valstr .= ", '$email'";
+				}
+				$sqlstr = "INSERT INTO loans ($colstr) VALUES ($valstr)";
+				//echo "<p>$sqlstr</p>";
+				$result = $this->dbupdate($sqlstr);
+
+				// get clerk name
+				$sqlstr = "SELECT staff_name FROM loans_clerk WHERE staff_id='$clerkid'";
+				$row = $this->dbquery($sqlstr);
+				$staff_name = $row[0]["staff_name"];
+
+				$this->dbclose($con);
+				return $staff_name;
+			}
+		}
+		return NULL;
 	}
 
 }

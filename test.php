@@ -89,6 +89,7 @@ $db->setUserSession();
 
 //echo getBalance("234567890000");
 $db->mTransfer("234567890000", "23456789002", 100, "testing", FALSE);
+//mTransfer($acct1, $acct2, $amount, $remarks, $interBank)
 
 $db->loginRecord(NULL, 1, "2st_pw", 1);
 
@@ -114,7 +115,7 @@ echo "<p></p>";
 //$db->addTimedTransfer("234567890000", "23456789002", "", 100, "2014-11-20", "fixed", "", 0, 1);
 //var_dump($db->getTimedTransfer());
 //$db->performTTransfer();
-
+echo $db->addLoanRecord("some where in hk", "Mr", "12345", "67890", NULL);
 
 echo "<p></p>";
 //var_dump($_SESSION);
