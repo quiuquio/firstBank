@@ -45,15 +45,15 @@ if(isset($_POST['user_name']) && !empty($_POST['user_name'])){
             else {
                 echo "<p>Login failed. Please try again.</p>";
                 $db->loginRecord($username, NULL, "1st_pw", 0);
-                //$p->showPageLoginForm();
-                $p->showPageLoginForm2();
+                $p->showPageLoginForm();
+                //$p->showPageLoginForm2();
             }
         }
     }
 }
 else if (!isset($_POST['user_name']) && empty($_POST['user_name'])){
-    //$p->showPageLoginForm();
-    $p->showPageLoginForm2();
+    $p->showPageLoginForm();
+    //$p->showPageLoginForm2();
 }
 
 function getpost($iname) {
