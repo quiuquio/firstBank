@@ -106,15 +106,18 @@ class DB
 	private function getLastLogin() {
 		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1) {
 			$uid = $_SESSION["uid"];
-			if ($this->dbconnect($con)) {
+		//	if ($this->dbconnect($con)) {
 				$sqlstr = "SELECT time FROM login_records WHERE u_id='$uid' AND success='1' AND (login_method='2nd_pw' OR login_method='facial') ORDER BY time DESC";
 				//echo "<p>$sqlstr</p>";
 				$rows = $this->dbquery($sqlstr);
-				$lastLogin = $rows[0]["time"];
-				$this->dbclose($con);
+				$lastLogin = "";
+				if (count($rows) > 0) {
+					$lastLogin = $rows[0]["time"];
+				}
+		//		$this->dbclose($con);
 				return $lastLogin;
-			}
-			return NULL;
+		//	}
+		//	return NULL;
 		}
 		return NULL;
 	}
@@ -124,7 +127,7 @@ class DB
 			$uid = $_SESSION["uid"];
 			if ($this->dbconnect($con)) {
 				// get last login
-				$_SESSION["lastlogin"] = getLastLogin();
+				$_SESSION["lastlogin"] = $this->getLastLogin();
 
 				// get accounts
 				$sqlstr = "SELECT acct_no, acct_type, balance FROM user_acct WHERE u_id='$uid'";
@@ -244,7 +247,7 @@ class DB
 		return FALSE;
 	}
 
-	public function mTransfer($acct1, $acct2, $amount, $remarks, $ttid, $interBank) {
+	public function mTransfer($acct1, $acct2, $amount, $remarks, $interBank) {
 		// will perform transfer only if acct1 belongs to current user.
 		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1 && 
 			isset($_SESSION["accts"]) && array_key_exists($acct1, $_SESSION["accts"])) {
@@ -259,17 +262,11 @@ class DB
 				if (!$interBank) {
 					$acctBalance2 = $this->getBalance($acct2);
 					$newBalance2 = $acctBalance2 + $amount;
-					$transType = "TTI";
-					if ($ttid == NULL) {
-						$transType = "TFI";
-					}
+					$transType = "TFI";
 					$this->updateBalance($acct2, $newBalance2);
 					$this->addTransaction($acct2, $acct1, $transType, $amount, $ttid, "settled", "0", $remarks, $newBalance2, $interBank);
 				}
-				$transType = "TTO";
-				if ($ttid == NULL) {
-					$transType = "TFO";
-				}
+				$transType = "TFO";
 				$this->addTransaction($acct1, $acct2, $transType, $amount, $ttid, "settled", "0", $remarks, $newBalance, $interBank);
 				return TRUE;
 			}

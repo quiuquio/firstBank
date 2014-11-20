@@ -12,9 +12,15 @@ function checkLogin() {
         if (isset($_POST['selectedPage']) && $_POST['selectedPage'] == "facialsuccess") {
             $_SESSION["login"] = 1;
             $db->loginRecord(NULL, $_SESSION["uid"], "facial", 1);
-        } elseif (isset($_POST['login2pw']) &&  check2ndpw($_POST['login2pw'])) {
-            $_SESSION["login"] = 1;
-            $db->loginRecord(NULL, $_SESSION["uid"], "2nd_pw", 1);
+        } elseif (isset($_POST['login2pw'])) {
+            if (check2ndpw($_POST['login2pw'])) {
+                $_SESSION["login"] = 1;
+                $db->loginRecord(NULL, $_SESSION["uid"], "2nd_pw", 1);
+            }
+            else {
+                $db->loginRecord(NULL, $_SESSION["uid"], "2nd_pw", 0);
+            }
+            
         }
     }
 }
