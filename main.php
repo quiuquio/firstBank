@@ -7,17 +7,20 @@ echo "<main>";
 
 function checkLogin() {
     //var_dump($_SESSION);
-    //var_dump($_POST);
-    if(isset($_SESSION["uid"]) && (!empty($_SESSION["uid"])) {
+    var_dump($_POST);
+    if(isset($_SESSION["uid"]) && (!empty($_SESSION["uid"]))) {
         if (isset($_POST['selectedPage']) && $_POST['selectedPage'] == "facialsuccess") {
             $_SESSION["login"] = 1;
             $db->loginRecord(NULL, $_SESSION["uid"], "facial", 1);
+        } elseif (isset($_POST['login2pw']) &&  check2ndpw($_POST['login2pw'])) {
+            $_SESSION["login"] = 1;
+            $db->loginRecord(NULL, $_SESSION["uid"], "2nd_pw", 1);
         }
     }
 }
 checkLogin();
 
-if($_SESSION["login"]==1){
+if($_SESSION["login"]==0){
     require('login.php');
 }
 else{

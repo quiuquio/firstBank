@@ -109,7 +109,9 @@ echo $db->getLastLogin(1);
 
 echo "<p></p>";
 
-$db->checkTransactions();
+//$db->checkTransactions();
+//$db->addTimedTransfer("234567890000", "23456789002", "", 100, "2014-11-20", "fixed", "", 0, 1);
+var_dump($db->getTimedTransfer());
 
 
 
