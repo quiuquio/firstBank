@@ -14,7 +14,7 @@ class DB
 	public function __construct() {
 		$this->dbhost = "localhost";
 		$this->dbuser = "root";
-		$this->dbpw = "24680";
+		$this->dbpw = "";
 		$this->dbname = "Ebanking";
 	}
 

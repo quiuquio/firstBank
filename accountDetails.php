@@ -19,7 +19,27 @@
                 </div>
                 <div class="separator-shadow"></div>
                 <table class="commonTable">
-                <tbody><tr>
+                <tbody>
+                <td class="label selectLabel">View Account:</td>
+                  <td colspan="4">
+                    <select id="acnts">
+                <?php
+                    //foreach ($_SESSION['accts'] as $value) {
+                    foreach ([1,2,3,4,5,6,7] as $value) {
+                        ?>
+                        <!-- <option value=<?php echo "'{$value['acct_no']}'"?>><?php echo "{$value['acct_no']}"?> <?php echo "{$value['acct_type']}"?></option>-->
+                        <option value=<?php $v = rand(); echo "{$v}"?>><?php echo "123"?> <?php echo "savings account hkd"?></option>
+                        <?php
+                    }
+                   ?>
+                   </select>
+                  </td>
+                </tr>
+                <script type="text/javascript">
+                    $("#acnts").change(function(evt){ console.log(evt);});
+                </script>
+
+                <!--<tr>
                   <td class="label selectLabel">View Account:</td>
                   <td colspan="4">
                     <select>
@@ -28,7 +48,7 @@
                       <option value="2"><?php echo '$user_account[2].number'?> <?php echo '$user_account[2].type'?></option>
                     </select>
                   </td>
-                </tr>
+                </tr>-->
                 <tr>
                   <td class="label">Account Type:</td>
                   <td class="contentFix"> <?php echo '$selected_account.type'?></td>
