@@ -1,5 +1,5 @@
-<h1>List of Transactions for account <?php echo '$UserSelectedAccount';?>:</h1>
 <table id="transactionsList">
+<h1>List of Transactions for account <?php echo '$UserSelectedAccount';?>:</h1>
     <tr>
         <th>Description</th>
         <th>Date</th>

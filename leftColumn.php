@@ -7,9 +7,7 @@
             <li class="active">
                 <h3><span class="icon-dashboard"></span>Account</h3>
                 <ul>
-                    <li id="selectAccount"><a href="#">Select account</a></li>
                     <li id="accountSummary"><a href="#">Account Summary</a></li>
-                    <li id="listTransactions"><a href="#">List Transactions</a></li>
                 </ul>
             </li>
             <!-- class="active" will keep this LI open by default -->

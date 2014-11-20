@@ -217,3 +217,22 @@ iframe {
 #pw2Block input{
     width:2em;
 }
+
+#page{}
+
+.commonTable{
+    width: 80%;
+    margin-left: 9%;
+    margin-right: 9%;
+    text-align: center;
+}
+
+.alCenter{
+    text-align: center;
+}
+.alRight{
+    text-align: right;
+}
+#acnts{
+    width: 50%;
+}
