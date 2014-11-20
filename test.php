@@ -87,7 +87,7 @@ $_SESSION["uid"] = 1;
 $db->setUserSession();
 
 //echo getBalance("234567890000");
-$db->mTransfer("234567890000", "23456789002", 100, "testing", NULL, FALSE);
+$db->mTransfer("234567890000", "23456789002", 100, "testing", FALSE);
 
 $db->loginRecord(NULL, 1, "2st_pw", 1);
 
@@ -105,11 +105,13 @@ if (check2ndpw("w-r-i")) {
 
 	echo "<p>ok</p>";
 }
-echo $db->getLastLogin(1);
+//echo $db->getLastLogin(1);
 
 echo "<p></p>";
 
-$db->checkTransactions();
+//$db->checkTransactions();
+//$db->addTimedTransfer("234567890000", "23456789002", "", 100, "2014-11-20", "fixed", "", 0, 1);
+var_dump($db->getTimedTransfer());
 
 
 
