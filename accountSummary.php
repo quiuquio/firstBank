@@ -13,38 +13,18 @@
                     <th class="balance right">Account Balance (DR=Debit)</th>
                 </tr>
                    <?php
-                    $retval = '';
+                   var_dump($_SESSION);
                     foreach ($_SESSION['accts'] as $value) {
                         ?>
                             <tr class="lvl2 title">
                                 <td colspan="2"><b><?php echo "{$value['acct_type']}";?></b></td>
-                                <td><?php echo "{$value['acct_number']}";?></td>
+                                <td><?php echo "{$value['acct_no']}";?></td>
                                 <td> HKD </td>
                                 <td> <?php echo "{$value['balance']}";?></td>
                            </tr>
                         <?php
                     }
                    ?>
-                <!--<tr class="lvl2">
-                        <td class="indent">&nbsp;</td>
-                        <td>
-                                         - HKD Savings
-                    </td><td></td>
-                    <td>HKD</td>
-                    <td class="right">
-                                   <?php echo '$selected_account.savings'?>
-                        </td>
-                </tr>
-                <tr class="lvl2 last">
-                        <td class="indent">&nbsp;</td>
-                        <td>
-                                       - HKD Current
-                    </td><td></td>
-                    <td>HKD</td>
-                    <td class="right">
-                                   <?php echo '$selected_account.current'?>
-                        </td>
-                </tr>-->
                                 </tbody></table>
                         </div>
                         <div class="bottom"></div>
@@ -57,7 +37,6 @@
 <div class="note">
         <h3>Note:</h3>
         <ol>
-            <li>Please click <a href="/1/3/pib/account-services/account-overview/remarks-for-account-balance-and-account-no-suffix?cmd-All_=" class="textLink1" target="_blank">here</a> to refer the remarks of account balance and account number.</li>
             <li>To view other accounts details, please <a href="#" id="accountDetails">click here</a></li>
             <li>Please note that balance of Paper Gold Grain Account is in GGA (1 GGA = 0.1 ounce).</li>
         </ol>

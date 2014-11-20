@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS Ebanking;
+USE Ebanking;
