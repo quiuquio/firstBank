@@ -129,7 +129,6 @@ class LoginPage{
         echo '<input type="password" id="login2pw" name="login2pw" value="" hidden/>';
         echo '<input type="submit" id="login2Submit" value="Log in" hidden/>';
         echo '</form>';
-        var_dump($_POST);
         ?>
 <script type="text/javascript">
     $('#login2Button').click(function(evt){
