@@ -30,6 +30,9 @@ if($_SESSION["login"]==0){
     require('login.php');
 }
 else{
+    // setup user session
+    $db->setUserSession();
+
     if((isset($_POST['selectedPage']) && !empty($_POST['selectedPage']))){
         switch ($_POST['selectedPage']){
             case 'financialTracker':
