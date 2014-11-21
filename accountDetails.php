@@ -81,8 +81,8 @@ foreach ($_SESSION['accts'] as $value) {
         <td><?php echo "{$val['remarks']}"?></td>
         <td><?php echo "{$val['t_timestamp']}"?></td>
         <?php
-        echo substr($val['transaction_type'], 1, -2);
-        if(substr($val['transaction_type'], 0, -1) == 'O'){
+        echo substr($val['transaction_type'], 2, 1);
+        if(substr($val['transaction_type'], 2, 1) == 'O'){
           echo "
               <td>-</td>
               <td>dHK&#36;{$val['amount']}</td>
