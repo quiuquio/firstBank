@@ -112,10 +112,10 @@ if (check2ndpw("w-r-i")) {
 echo "<p></p>";
 
 //$db->checkTransactions();
-//$db->addTimedTransfer("234567890000", "23456789002", "", 100, "2014-11-20", "fixed", "", 0, 1);
+$db->addTimedTransfer("234567890000", "23456789002", "", 100, "2014-11-21", "fixed", "", 0, 1);
 //var_dump($db->getTimedTransfer());
 //$db->performTTransfer();
-echo $db->addLoanRecord("some where in hk", "Mr", "12345", "67890", NULL);
+//echo $db->addLoanRecord("some where in hk", "Mr", "12345", "67890", NULL);
 
 echo "<p></p>";
 //var_dump($_SESSION);
