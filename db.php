@@ -250,7 +250,6 @@ class DB
 	public function mTransfer($acct1, $acct2, $amount, $remarks, $interBank) {
 		// will perform transfer only if acct1 belongs to current user.
 		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1 && $this->hasAcct($acct1)) {
-
 			$acctBalance = $this->getBalance($acct1);
 			if ($acctBalance < $amount) {
 				return FALSE;

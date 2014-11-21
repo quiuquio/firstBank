@@ -18,7 +18,7 @@
     ?>
     <div id="sessionInfo">
         <p>User: <a href="#" id="userSettings"><?php echo "{$_SESSION['firstn']} {$_SESSION['lastn']}";?></a></p>
-        <p>Login date: <?php echo "{$_SESSION['lastlogin']}";?></p>
+        <p>Last login date: <?php echo "{$_SESSION['lastlogin']}";?></p>
         <!--<p>Status: <?php echo '$ServiceStatus';?></p>-->
         <form id="logoutForm" name="logoutForm" method="POST" action="index.php">
             <input type="submit" name="logout" value="logout">
