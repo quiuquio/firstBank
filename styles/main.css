@@ -242,3 +242,10 @@ margin-right: 35%;
 width: 10%;
 height: 2em;
 }
+
+#bankCode{
+    width: 4em;
+}
+#msg4R{
+    width: 50%;
+}

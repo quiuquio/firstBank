@@ -89,7 +89,11 @@ $db->setUserSession();
 
 //echo getBalance("234567890000");
 //$db->mTransfer("234567890000", "23456789002", 100, "testing", FALSE);
+<<<<<<< HEAD
 $db->mTransfer("234567890000", "23456789003", 100, "", TRUE);
+=======
+$db->mTransfer("234567890000", "23456789007", 100, "testing", TRUE);
+>>>>>>> 40b96bb4199234c7679127f5206fc511c57d7044
 //mTransfer($acct1, $acct2, $amount, $remarks, $interBank)
 
 $db->loginRecord(NULL, 1, "2st_pw", 1);

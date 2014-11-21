@@ -95,7 +95,7 @@
       </tr>
       <tr valign="top">
         <td valign="top" width="3%" class="LightGrey"><input type="checkbox" name="3rdMemUseTickbox" value="Y"></td>
-        <td width="97%" class="LightGrey"><font class="CONTENT">Check this box if you <b>do not</b> wish the Bank to provide your personal data to any other members of the Hang Seng Bank Group for their use in direct marketing.</font></td>
+        <td width="97%" class="LightGrey"><font class="CONTENT">Check this box if you <b>do not</b> wish the Bank to provide your personal data to any other members of the First Bank Group for their use in direct marketing.</font></td>
       </tr>
       <tr>
         <td colspan="2" class="LightGrey"><font class="CONTENT"><b>Your choice above to check or not to check any of the boxes represents your present
@@ -106,7 +106,7 @@
         Please note that your above choice applies to the direct marketing of the classes of products, services and/or subjects as set out in the Bank’s
         <a href="#" target="ChangeInfo" onclick=""><font class="ContentLink">
         Notice to Customers and Other Individuals relating to the Personal Data (Privacy) Ordinance</font></a>, 
-        including, for example, Hang Seng Credit Card
+        including, for example, First Bank Credit Card
         promotions and special offers provided by merchants. Please also refer to the Notice on the kinds of personal 
         data which may be used in direct
         marketing and the classes of persons to which your personal data may be provided for them to use in direct 
@@ -146,7 +146,7 @@
       
       <tr>
         <td valign="top"><font class="CONTENT"><font color="red">#</font></font></td>
-        <td><font class="CONTENT"><font color="red">This hyperlink may allow you to leave FIrst Bank Limited website. The website accessed through this hyperlink may not provide you with any regulatory protections. Hang Seng Bank Limited has no control over the linked website and is not liable for your use of the hyperlinked website.
+        <td><font class="CONTENT"><font color="red">This hyperlink may allow you to leave FIrst Bank Limited website. The website accessed through this hyperlink may not provide you with any regulatory protections. First Bank Limited has no control over the linked website and is not liable for your use of the hyperlinked website.
                 </font></font></td>
       </tr>
     </tbody></table>
