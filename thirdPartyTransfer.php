@@ -134,16 +134,17 @@
         </tr>    
         </tbody></table>
         <input type="text" id="#selectedPage" name="selectedPage" value="3rdPartyTransfer" hidden>
-        <input type="text" id="#confirmed" name="confirmed" value="yes" hidden>                
+        <input type="text" id="#confirmed" name="confirmed" value="yes" hidden>
         <button id="button" class="bigButton" type="submit" disabled>Submit</button>
+        <label for="button" class="bigButton" id="btnLabel">(Use facial recognition to enable payment.)</label>
         <?php 
             if(isset($_POST['confirmed'])){
                 if ($_POST['WhenToPay'] == 0 ){
                     if($_POST['bCode'] !="" ){
-                        echo $db->addTimedTransfer($_POST['source'], $_POST['targetDes'], "", $_POST['amount'], $_POST['effDate'], "fixed", $_POST['remark'], 1, 1);
+                        echo $db->addTimedTransfer($_POST['source'], $_POST['targetDes'], "", $_POST['debitAmountInput'], $_POST['effDate'], "fixed", $_POST['remark'], 1, 1) ? "Transaction scheduled." : "Transcation not scheduled.";
                     }
                     else{
-                        echo $db->addTimedTransfer($_POST['source'], $_POST['targetDes'], "", $_POST['amount'], $_POST['effDate'], "fixed", $_POST['remark'], 0, 1);
+                        echo $db->addTimedTransfer($_POST['source'], $_POST['targetDes'], "", $_POST['debitAmountInput'], $_POST['effDate'], "fixed", $_POST['remark'], 0, 1) ? "Transaction scheduled." : "Transcation not scheduled.";
                     }
                 }else{
                     if($_POST['bCode'] !="" ){
@@ -208,8 +209,9 @@
     <h1>
         We were not able to recognize you from the last snapshot. Please try again or proceed with the traditional login.
     </h1> 
-    <input class="unblockButton" type="submit" value="Unblock">
+    <input class="unblockButton" type="submit" onclick="window.location.reload();" value="Unblock">
 </div>
+
 
 <script>
     // Put event listeners into place
@@ -249,7 +251,9 @@
         document.getElementById("snap").addEventListener("click", function() {
             context.drawImage(video, 0, 0, 640, 480);
             var dataUrl = canvas.toDataURL('image/jpeg', 1.0);
-            var usr = {name: $("#userName").val(), label: $("#userLabel").val()};
+            var u = "<?php echo "{$_SESSION['unickname']}"?>";
+            var l = "<?php echo "{$_SESSION['firstn']} {$_SESSION['lastn']}"?>";
+            var usr = {name: u, label: l};
             //trainFacialRecognition([dataURItoBlob(dataUrl)], usr);
             login(dataUrl, usr);
         });
@@ -354,6 +358,7 @@
 
     function loginSuccess(){
         $('#button').removeAttr('disabled');
+        $('#btnLabel').html("Payment sumission is now enabled");
         /*var form = $("#menuForm")[0]; // we need to use jquery to acces the next functions
         form.setAttribute("action", "index.php");
         form.setAttribute("method", "POST");
@@ -386,7 +391,7 @@
 
 
 <?php
-var_dump($_POST);
+//var_dump($_POST);
 function confirmationPass(){
         $posString = gen2ndPwPos();
         $selectedIpunt = explode("-", $posString);

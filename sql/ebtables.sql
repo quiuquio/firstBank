@@ -74,9 +74,7 @@ CREATE TABLE IF NOT EXISTS timed_transfers (
   remark varchar(500),
   active boolean,
   PRIMARY KEY (t_id),
-  FOREIGN KEY (from_account) REFERENCES user_acct(acct_no),
-  FOREIGN KEY (to_account) REFERENCES user_acct(acct_no)
-
+  FOREIGN KEY (from_account) REFERENCES user_acct(acct_no)
   ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

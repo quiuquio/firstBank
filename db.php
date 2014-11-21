@@ -14,7 +14,7 @@ class DB
 	public function __construct() {
 		$this->dbhost = "localhost";
 		$this->dbuser = "root";
-		$this->dbpw = "24680";
+		$this->dbpw = "";
 		$this->dbname = "Ebanking";
 	}
 
@@ -239,7 +239,7 @@ class DB
 				$valstr .= ", '$remarks'";
 			}
 			$sqlstr = "INSERT INTO transactions ($colstr) VALUES ($valstr)";
-			echo "<p>$sqlstr</p>";
+			//echo "<p>$sqlstr</p>";
 			$result = $this->dbupdate($sqlstr);
 			$this->dbclose($con);
 			return $result;
@@ -279,7 +279,7 @@ class DB
 		if (isset($_SESSION["uid"]) && $_SESSION["login"]==1 && $this->hasAcct($acct1)) {
 			if ($this->dbconnect($con)) {
 				$colstr = "from_account, t_type, t_amount, starting_time, t_interval, interbank, active";
-				$valstr = "'$acct1', '$tType', '$amount', '$startTime', '$interval', '$interBank', '$active'";
+				$valstr = "'$acct1', '$tType', '$amount', TIMESTAMP('$startTime'), '$interval', '$interBank', '$active'";
 				if ($acct2 != NULL) {
 					$colstr .= ", to_account";
 					$valstr .= ", '$acct2'";
@@ -289,7 +289,7 @@ class DB
 					$valstr .= ", '$remarks'";
 				}
 				$sqlstr = "INSERT INTO timed_transfers ($colstr) VALUES ($valstr)";
-				//echo "<p>$sqlstr</p>";
+				echo "<p>$sqlstr</p>";
 				$result = $this->dbupdate($sqlstr);
 				$this->dbclose($con);
 				return $result;

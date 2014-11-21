@@ -781,7 +781,7 @@
         <?php 
             if(isset($_POST['confirmed'])){
                 if ($_POST['WhenToPay'] == 0 ){
-                    echo $db->addTimedTransfer($_POST['source'], $_POST['billAcc'], "Bill Payment", $_POST['amount'], $_POST['effDate'], "fixed", "", 1, 1);                
+                    echo $db->addTimedTransfer($_POST['source'], $_POST['billAcc'], "", $_POST['debitAmountInput'], $_POST['effDate'], "fixed", "", 1, 1) ? "Transaction scheduled." : "Transcation not scheduled.";                
                 }else{
                     echo $db->mTransfer($_POST['source'], $_POST['billAcc'], $_POST['debitAmountInput'], "Bill Payment", TRUE) ? "Transaction successful." : "Transcation failed.";
                     //echo $db->mTransfer($_POST['source'], 123456789011, 123, "", TRUE) ? "Transaction successful." : "Transcation failed.";        
