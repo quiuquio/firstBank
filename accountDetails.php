@@ -25,7 +25,8 @@
                 <script type="text/javascript">
                     $("#acnts").change(function(evt){ 
                       q = $('#contents3')[0];
-                      $.each(q.children, function(c,v){v.hidden = true;
+                      $.each(q.children, function(c,v){
+                        v.hidden = true;
                         asd = v;
                           $("#sup"+v.id)[0].hidden = true;
                       });
@@ -129,3 +130,12 @@ foreach ($_SESSION['accts'] as $value) {
 </div>
 </div>
 </div>
+
+<script type="text/javascript"> 
+  q = $('#contents3')[0];
+  $.each(q.children, function(c,v){
+    v.hidden = true;
+    asd = v;
+    $("#sup"+v.id)[0].hidden = true;
+  });
+</script>
