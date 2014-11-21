@@ -88,7 +88,8 @@ $_SESSION["uid"] = 1;
 $db->setUserSession();
 
 //echo getBalance("234567890000");
-$db->mTransfer("234567890000", "23456789002", 100, "testing", FALSE);
+//$db->mTransfer("234567890000", "23456789002", 100, "testing", FALSE);
+$db->mTransfer("234567890000", "23456789003", 100, "", TRUE);
 //mTransfer($acct1, $acct2, $amount, $remarks, $interBank)
 
 $db->loginRecord(NULL, 1, "2st_pw", 1);
