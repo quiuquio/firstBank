@@ -165,7 +165,7 @@
                 </tr>
 <tr>
         <td align="LEFT" class="LightGrey"><font class="CONTENT">Residential Tel. No.:</font></td>
-        <td class="LightGrey" valign="TOP"><input type="text" name="ResideTelNo" autocomplete="off" size="15" maxlength="13" value="<?php echo '$user_residential_number'?>"></td>
+        <td class="LightGrey" valign="TOP"><input type="text" name="ResideTelNo" autocomplete="off" size="15" maxlength="13" value="<?php echo "{$_SESSION['firstn']}"?>"></td>
 </tr>
 <tr>
         <td align="LEFT" class="LightGrey"><font class="CONTENT">Mobile Phone/Pager No.:</font></td>
