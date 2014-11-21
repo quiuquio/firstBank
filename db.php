@@ -289,7 +289,7 @@ class DB
 					$valstr .= ", '$remarks'";
 				}
 				$sqlstr = "INSERT INTO timed_transfers ($colstr) VALUES ($valstr)";
-				echo "<p>$sqlstr</p>";
+				//echo "<p>$sqlstr</p>";
 				$result = $this->dbupdate($sqlstr);
 				$this->dbclose($con);
 				return $result;

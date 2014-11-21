@@ -141,7 +141,7 @@
 
 
 <?php
-var_dump($_POST);
+//var_dump($_POST);
 function confirmationPass(){
         $posString = gen2ndPwPos();
         $selectedIpunt = explode("-", $posString);

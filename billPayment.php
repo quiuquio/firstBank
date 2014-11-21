@@ -818,7 +818,6 @@
 </script>
 
 <?php
-var_dump($_POST);
 function confirmationPass(){
         $posString = gen2ndPwPos();
         $selectedIpunt = explode("-", $posString);
