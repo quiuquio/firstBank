@@ -21,6 +21,10 @@ echo    '
   </script>
 <?php
 echo "<div id='wrapper'>";
+if($_SESSION["login"]==1){
+  // setup user session
+  $db->setUserSession();
+}
 require('header.php');
 require('leftColumn.php');
 require('main.php');
