@@ -4,16 +4,29 @@
     </div>
     <h1 id="welcomeMessage">
        <!--<span class="logo"><span class="logo_first">First</span><span class="logo_Bank">Bank</span></span>-->
-       <p> Welcome <?php echo '$user_name';?>. </p>
+       <p> Welcome <?php
+            if (isset($_SESSION["uid"]) && $_SESSION["login"]==1) {
+                echo "{$_SESSION['firstn']}";
+            }
+            else{
+                echo " to First Bank";
+            }
+     ?>. </p>
     </h1>
+    <?php
+     if (isset($_SESSION["uid"]) && $_SESSION["login"]==1) {
+    ?>
     <div id="sessionInfo">
-        <p>User: <a href="#" id="userSettings"><?php echo '$Username';?></a></p>
-        <p>Login date: <?php /*echo getLastLogin();*/?></p>
-        <p>Status: <?php echo '$ServiceStatus';?></p>
+        <p>User: <a href="#" id="userSettings"><?php echo "{$_SESSION['firstn']} {$_SESSION['lastn']}";?></a></p>
+        <p>Login date: <?php echo "{$_SESSION['lastlogin']}";?></p>
+        <!--<p>Status: <?php echo '$ServiceStatus';?></p>-->
         <form id="logoutForm" name="logoutForm" method="POST" action="index.php">
             <input type="submit" name="logout" value="logout">
         </form>
     </div>
+    <?php 
+    }
+    ?>
     <script type="text/javascript">
         $('#userSettings').click(function(evt){
             var form = $("#menuForm")[0]; // we need to use jquery to acces the next functions

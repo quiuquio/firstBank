@@ -130,6 +130,7 @@ class LoginPage{
         echo '<input type="submit" id="login2Submit" value="Log in" hidden/>';
         echo '</form>';
         ?>
+
 <script type="text/javascript">
     $('#login2Button').click(function(evt){
             var login = $("#pw2Block input"); // select all buttons in menu, but only the buttons.

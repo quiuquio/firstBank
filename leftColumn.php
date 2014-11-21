@@ -23,7 +23,6 @@
                 <h3><span></span>Financial Tools</h3>
                 <ul>
                     <li id="financialTracker"><a href="#">Market Tracker</a></li>
-                    <li id="currentPrices"><a href="#">Current Prices</a></li>
                 </ul>
             </li>
             <li class="active">

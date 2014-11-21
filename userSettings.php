@@ -19,15 +19,7 @@
         <tr>
           <td colspan="4" class="MiddleGrey">
             <font class="Content">Below is your personal
-                information recorded in the bank. To change your phone numbers
-                and /or address, please complete the 
-                <a href="#" target="ChangeInfo">
-                form</a> (download <a href="#" target="_blank">
-                <font class="contentlink">
-                Adobe Acrobat Reader
-                </font></a><sup>#</sup> to
-                view the form) and return it to any of our branches in person or mail to First Bank Limited at GPO
-                Box 1337</font>
+                information recorded in the bank.
         </td>
       </tr>
         <tr>

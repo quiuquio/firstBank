@@ -236,3 +236,9 @@ iframe {
 #acnts{
     width: 50%;
 }
+.bigButton {
+margin-left: 35%;
+margin-right: 35%;
+width: 10%;
+height: 2em;
+}

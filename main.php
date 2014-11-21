@@ -36,7 +36,7 @@ else{
     if((isset($_POST['selectedPage']) && !empty($_POST['selectedPage']))){
         switch ($_POST['selectedPage']){
             case 'financialTracker':
-                setTitle("");
+                setTitle("Financial Traker");
                 require('financialTracker.php');
                 break;
             case 'selectAccount':
@@ -59,6 +59,10 @@ else{
                 setTitle("Make Payments");
                 require('makePayments.php');
                 break;  
+            case 'confirmPayment':
+                setTitle("Confirm Transfer");
+                require('confirmTransfer.php');
+                break; 
             case 'billPayment':
                 setTitle("Bill Payments");
                 require('billPayment.php');
@@ -80,8 +84,8 @@ else{
                 require('mortgage.php');
                 break;
             default:
-                setTitle("List of Transactions");
-                require('listTransactions.php');
+                setTitle("Account Summary");
+                require('accountSummary.php');
                 break;
         }
         /*
