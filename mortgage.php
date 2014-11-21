@@ -29,7 +29,7 @@
         <table border="0" cellpadding="3" width="99%">
                 <tbody><tr>
                         <td class="MiddleGrey" colspan="2"><font class="CONTENT">Please fill
-                        in the following information to apply online.</font></td>
+                        in the following information to apply for more specific information online.</font></td>
                 </tr>
                 <tr>
                         <td class="MiddleGrey" colspan="2"><font class="BlackTitle">Applicant Personal Information</font></td>

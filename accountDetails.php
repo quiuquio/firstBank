@@ -12,6 +12,7 @@
                 <th class="label selectLabel">View Account:</th>
                   <th colspan="4">
                     <select id="acnts">
+                    <option value="">------------SELECT ACCOUNT NAME------------</option>
                 <?php
                     foreach ($_SESSION['accts'] as $value) {
                         ?>
