@@ -21,6 +21,7 @@ else {
 	session_destroy();
 	$key = NULL;
 	$db = NULL;
+    echo "<script>window.location.reload();</scipt>";
 }
 
 function logout(){
