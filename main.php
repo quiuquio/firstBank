@@ -94,6 +94,9 @@ else{
         savingAccounts
         currentPrices
         */
+    }else{
+        setTitle("Account Summary");
+        require('accountSummary.php');  
     }
 }
 echo "</main>";

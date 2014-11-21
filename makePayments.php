@@ -36,7 +36,7 @@
             </td>
             <td class="LightGrey">
             <font class="SELECT"> 
-            <select name="targetDes" id="source">
+            <select name="targetDes">
                 <option value="" selected="selected">----------- Please select account -----------</option>
                 <?php
                     foreach ($_SESSION['accts'] as $value) {
@@ -114,7 +114,12 @@
         <input type="text" id="#selectedPage" name="selectedPage" value="confirmPayment" hidden>                
     </tbody></table>
     <button id="button" class="bigButton" type="submit">Submit</button>
-    <?php confirmationPass(); ?>
+    <?php 
+        if(isset($_POST['confirmPayment'])){
+            $db->mTransfer($_POST['source'], $_POST['targetDes'], $_POST['amount'], "", FALSE);
+        }
+
+    ?>
 </form>
 
 <script type="text/javascript">
