@@ -47,8 +47,8 @@
                 </td>
                 <td class="LightGrey">
                 <font class="CONTENT"><br>                
-                <input type="text" maxlength="3" id="bankCode"/> -
-                <input type="text" name="targetDes" autocomplete="off" size="16" maxlength="16" value=""><br>
+                <input type="text" maxlength="3" id="bankCode" name="bCode"/> -
+                <input type="text" name="targetDes" autocomplete="off" size="16" maxlength="11" value=""><br>
                 (Please input number only and omit '-' and spaces.<br> For First Bank accounts the Bank Code is not required.)</font>
                 </td>
         </tr>
@@ -138,10 +138,20 @@
         <button id="button" class="bigButton" type="submit">Submit</button>
         <?php 
             if(isset($_POST['confirmed'])){
-                if ($_POST['WhenToPay'] == 0){
-                    echo $db->addTimedTransfer($_POST['source'], $_POST['targetDes'], "", $_POST['amount'], $_POST['effDate'], "fixed", "", 0, 1);
+                if ($_POST['WhenToPay'] == 0 ){
+                    if($_POST['bCode'] !="" ){
+                        echo $db->addTimedTransfer($_POST['source'], $_POST['targetDes'], "", $_POST['amount'], $_POST['effDate'], "fixed", $_POST['remark'], 1, 1);
+                    }
+                    else{
+                        echo $db->addTimedTransfer($_POST['source'], $_POST['targetDes'], "", $_POST['amount'], $_POST['effDate'], "fixed", $_POST['remark'], 0, 1);
+                    }
                 }else{
-                    echo $db->mTransfer($_POST['source'], $_POST['targetDes'], $_POST['debitAmountInput'], "", FALSE) ? "Transaction successful." : "Transcation failed.";
+                    if($_POST['bCode'] !="" ){
+                        echo $db->mTransfer($_POST['source'], $_POST['targetDes'], $_POST['debitAmountInput'], $_POST['remark'], TRUE) ? "Transaction successful." : "Transcation failed.";
+                        //echo $db->mTransfer($_POST['source'], 123456789011, 123, "", TRUE) ? "Transaction successful." : "Transcation failed.";        
+                    }else{
+                        echo $db->mTransfer($_POST['source'], $_POST['targetDes'], $_POST['debitAmountInput'], $_POST['remark'], FALSE) ? "Transaction successful." : "Transcation failed.";
+                    }
                 }
             }else{
                 echo "";
