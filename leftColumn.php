@@ -2,6 +2,9 @@
         <form name="menu" id="menuForm">
             <input type="submit" id="selectedPage" name="selectedPage" value="" hidden>
         </form>
+        <?php
+            if(isset($_SESSION) and $_SESSION['login'] == 1){
+        ?>
         <div id="accordian">
         <ul>
             <li class="active">
@@ -33,6 +36,9 @@
             </li>
         </ul>
     </div>
+    <?php
+    }
+    ?>
     
 <script type="text/javascript">
     $(document).ready(function(){

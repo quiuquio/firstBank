@@ -4,7 +4,7 @@
 </form>
 <div style="text-align:center; display:block">
     <video id="video" width="640" height="480" autoplay></video>
-    <button id="snap" class="sexyButton">Snap Photo</button>
+    <button id="snap" class="">Try to login</button>
     <input id="userName" type="text" name="username" value="<?php echo $_POST['user_name']?>" hidden>
     <input id="userLabel"type="text" name="label" value="bank user" hidden>
     <canvas id="canvas" width="640" height="480" hidden></canvas>

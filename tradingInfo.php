@@ -91,13 +91,12 @@ new TradingView.MiniWidget({
       ]
     ],
     "Forex": [
+      "FX:HKDJPY",
       "FX:EURUSD",
       "FX:GBPUSD",
       "FX:USDJPY",
       "FX:USDCHF",
-      "FX:AUDUSD",
-      "FX:USDCAD",
-      "FX:HKDJPY"
+      
     ]
   },
   "gridLineColor": "#E9E9EA",

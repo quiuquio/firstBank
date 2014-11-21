@@ -11,7 +11,7 @@
             else{
                 echo " to First Bank";
             }
-     ?>. </p>
+     ?> </p>
     </h1>
     <?php
      if (isset($_SESSION["uid"]) && $_SESSION["login"]==1) {

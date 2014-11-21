@@ -250,3 +250,7 @@ height: 2em;
 #msg4R{
     width: 50%;
 }
+
+.ui-tooltip {
+    opacity: 0.9;
+  }
