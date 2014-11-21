@@ -39,6 +39,7 @@ if(isset($_POST['user_name']) && !empty($_POST['user_name'])){
             $uid = $db->getUid($username, $passwd);
             if ($uid > 0) {
                 $_SESSION["uid"] = $uid;
+                $_SESSION["unickname"] = $username;
                 $db->loginRecord($username, $uid, "1st_pw", 1);
                 $p->showPageLoginForm2();
             }
