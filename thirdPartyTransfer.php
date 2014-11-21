@@ -26,21 +26,6 @@
                 <td class="LightGrey">
                 <table border="0" cellspacing="0" cellpadding="0">
                         <tbody><tr>
-                                <td>
-                                <input type="radio" name="toAccount" value="0" checked="checked">
-                                <font class="CONTENT">Registered Account</font></td>
-                        </tr>
-                </tbody></table>
-                </td>
-                <td class="LightGrey"><font class="SELECT">
-                <select name="creditAccountList">
-                    <option value="">----------- Please select account -----------</option>
-                </select></font></td>
-        </tr>
-        <tr>
-                <td class="LightGrey">
-                <table border="0" cellspacing="0" cellpadding="0">
-                        <tbody><tr>
                                 <td><font class="CONTENT">
                                 <input type="radio" name="toAccount" value="1">
                                 <font class="CONTENT">Non-registered Account </font></font></td>

@@ -111,12 +111,19 @@
             </select>
             </font></td>
         </tr>  
-        <input type="text" id="#selectedPage" name="selectedPage" value="confirmPayment" hidden>                
+        <input type="text" id="#selectedPage" name="selectedPage" value="makePayments" hidden>
+        <input type="text" id="#confirmed" name="confirmed" value="yes" hidden>                
     </tbody></table>
     <button id="button" class="bigButton" type="submit">Submit</button>
     <?php 
-        if(isset($_POST['confirmPayment'])){
-            $db->mTransfer($_POST['source'], $_POST['targetDes'], $_POST['amount'], "", FALSE);
+        if(isset($_POST['confirmed'])){
+            if ($_POST['WhenToPay'] == 0){
+                echo $db->addTimedTransfer($_POST['source'], $_POST['targetDes'], "", $_POST['amount'], $_POST['effDate'], "fixed", "", 0, 1);
+            }else{
+                echo $db->mTransfer($_POST['source'], $_POST['targetDes'], $_POST['amount'], "", FALSE) ? "Transaction successful." : "Transcation failed.";
+            }
+        }else{
+            echo "";
         }
 
     ?>
