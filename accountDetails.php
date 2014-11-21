@@ -24,12 +24,20 @@
                 </tr>
                 <script type="text/javascript">
                     $("#acnts").change(function(evt){ 
-                      console.log(evt);
+                      q = $('#contents3')[0];
+                      $.each(q.children, function(c,v){v.hidden = true;
+                        asd = v;
+                          $("#sup"+v.id)[0].hidden = true;
+                      });
+                      console.log(evt.target.value);
+                      $("#"+evt.target.value)[0].hidden = false;
+                      $("#sup"+evt.target.value)[0].hidden = false;
                     });
                 </script>
                 <?php
                 foreach ($_SESSION['accts'] as $value) {
                   ?>
+                  <table class="commonTable" id=<?php echo "'sup{$value['acct_no']}'"?> >
                   <tr class="LightGrey">
                     <td class="label">Account Type:</td>
                     <td class="contentFix"> <?php echo "{$value['acct_type']}"?></td>
@@ -42,6 +50,7 @@
                     <td class="label labelLeftBorder">Account Balance:</td>
                     <td class="contentFix"><?php echo "{$value['balance']}"?></td>
                   </tr>
+                  </table>
                   <!--<tr class="noVertBorder">
                     <td class="label">Balance*:</td>
                     <td>View details</td>
@@ -65,7 +74,8 @@
 foreach ($_SESSION['accts'] as $value) {
 //print_r($db->getTransactions($value['acct_no']));
 ?>
-<table id=<?php echo "'{$value['acct_no']}'"?> class="commonTable">
+<div id=<?php echo "'{$value['acct_no']}'"?>>
+<table  class="commonTable">
 <h1>List of Transactions for<?php echo " {$value['acct_type']} {$value['acct_no']}"?>:</h1>
     <tr class="MiddleGrey">
         <th>Description</th>
@@ -105,6 +115,7 @@ foreach ($_SESSION['accts'] as $value) {
       <td><?php echo "HK&#36;{$value['balance']}"?></td>
     </tr>
 </table>
+</div>
 <?php
 }
 ?>
