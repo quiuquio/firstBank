@@ -16,7 +16,7 @@ echo    '
 ?>
 <script>
   $(function() {
-    $( document ).tooltip();
+    $( document ).tooltip({track: true});
   });
   </script>
 <?php

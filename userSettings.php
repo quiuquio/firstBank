@@ -21,11 +21,11 @@
         <td colspan="2" class="LightGrey"><font class="CONTENT"><b>Your choice above to check or not to check any of the boxes represents your present
         choice whether or not to receive direct marketing contact or information which shall become effective from the date the Bank approves this
         application. This replaces any choice or request regarding direct marketing communicated by you to the Bank prior to this application, unless
-        this application is withdrawn or rejected for whatever reason.</b> Please <a href="#" onclick=""><font class="ContentLink">contact us</font></a>
+        this application is withdrawn or rejected for whatever reason.</b> Please contact us
         if you want to know your choice prior to this application.<br><br>
-        Please note that your above choice applies to the direct marketing of the classes of products, services and/or subjects as set out in the Bank’s
-        <a href="#" target="ChangeInfo" onclick=""><font class="ContentLink">
-        Notice to Customers and Other Individuals relating to the Personal Data (Privacy) Ordinance</font></a>, 
+        Please note that your above choice applies to the direct marketing of the classes of products, services and/or subjects as set out in the Bank's
+
+        Notice to Customers and Other Individuals relating to the Personal Data (Privacy) Ordinance</font>, 
         including, for example, First Bank Credit Card
         promotions and special offers provided by merchants. Please also refer to the Notice on the kinds of personal 
         data which may be used in direct
@@ -56,18 +56,7 @@
       </tr>
       <tr>
         <td valign="top"><font class="Content">2.</font></td>
-        <td><font class="Content">Please refer to our <a href="#" target="ChangeInfo" onclick="openCommonDotcomURL('PIB605', 'eng');return false;"><font class="ContentLink">Notice to Customers and Other Individuals relating to the Personal Data (Privacy) Ordinance</font></a>.</font></td>
-      </tr>
-      
-      <tr>
-        <td valign="top"><font class="Content">3.</font></td>
-        <td><font class="Content">The email address you provided above will be the major email address which our Bank will use for most of the communications. This will also be used for receiving the email reminder on the day of e-statement/e-Advice delivery.</font></td>
-      </tr>
-      
-      <tr>
-        <td valign="top"><font class="CONTENT"><font color="red">#</font></font></td>
-        <td><font class="CONTENT"><font color="red">This hyperlink may allow you to leave First Bank Limited website. The website accessed through this hyperlink may not provide you with any regulatory protections. First Bank Limited has no control over the linked website and is not liable for your use of the hyperlinked website.
-                </font></font></td>
+        <td><font class="Content">Please refer to our <font class="ContentLink">Notice to Customers and Other Individuals relating to the Personal Data (Privacy) Ordinance</font>.</font></td>
       </tr>
     </tbody></table>
 </form>

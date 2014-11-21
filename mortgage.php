@@ -1,4 +1,25 @@
 <font class="title2">Online Mortgage Application Form</font>
+
+<?php
+if(isset($_POST['mortgageRequestSent'])){
+//addLoanRecord($address, $title, $tel, $mobile, $email);
+$address = "{$_POST['RoomOrFlat']}, {$_POST['Flat']}, {$_POST['Floor']}, {$_POST['Block']}, {$_POST['Building']}, {$_POST['Estate']}, {$_POST['StreetNo']}, {$_POST['StreetName']}, {$_POST['HomeDistrict']}";
+$title = "{$_POST['title']}";
+$email = "{$_POST['EmailAddress']}";
+$tel = "{$_POST['ResideTelNo']}";
+$mobile = "{$_POST['PagerMobile']}";
+$staffName = $db->addLoanRecord($address, $title, $tel, $mobile, $email);
+echo "
+<div class='stdBox'>
+<p>
+Thank you for you interest in our loans and mortgages. Your request will be handled by our staff member
+<b>{$staffName}</b> and you will be contacted soon.
+</p>
+</div>
+";
+}
+?>
+
 <form method="POST" action="" name="" autocomplete="off"> 
         <div class='stdBox'>
             <h3>Project loans</h3>
@@ -196,21 +217,3 @@
         <input name="mortgageRequestSent" value="1" hidden>
         <button id="button" class="bigButton" type="submit">Submit</button>
 </form>
-
-<?php
-if(isset($_POST['mortgageRequestSent'])){
-//addLoanRecord($address, $title, $tel, $mobile, $email);
-$address = "{$_POST['RoomOrFlat']}, {$_POST['Flat']}, {$_POST['Floor']}, {$_POST['Block']}, {$_POST['Building']}, {$_POST['Estate']}, {$_POST['StreetNo']}, {$_POST['StreetName']}, {$_POST['HomeDistrict']}";
-$title = "{$_POST['title']}";
-$email = "{$_POST['EmailAddress']}";
-$tel = "{$_POST['ResideTelNo']}";
-$mobile = "{$_POST['PagerMobile']}";
-$staffName = $db->addLoanRecord($address, $title, $tel, $mobile, $email);
-echo "
-<p>
-Thank you for you interest in our loans and mortgages. Your request will be handled by our staff member
-{$staffName} and you will be contacted soon.
-</p>
-";
-}
-?>

@@ -114,7 +114,7 @@ class LoginPage{
         echo '<label for="pw2Block">Password</label> ';
         echo '<!--<input id="login_input_password" type="password" name="user_password" required />-->';
         echo "
-                <div id='pw2Block'>
+                <div id='pw2Block' title='Insert the missing digits from your 2nd-step passowrd. One digit per field.'>
                 <input type='password' maxlength='1' name='pw2_0' {$vals[0]} {$disables[0]}/>
                 <input type='password' maxlength='1' name='pw2_1' {$vals[1]} {$disables[1]}/>
                 <input type='password' maxlength='1' name='pw2_2' {$vals[2]} {$disables[2]}/>
@@ -214,7 +214,7 @@ class LoginPage{
                 <h3>Always log off</h3>
                     Always remember to log off properly and close the browser after you have finished using e-Banking Services.
                 <h3>Disable the auto-complete function within your browser</h3>
-                    The auto-complete feature saves previous entries you have made for Web addresses, forms, and passwords. For security protection, the auto-complete function of your browser should be disabled to avoid sensitive information is saved and displayed for the automatic completion. Please refer to your browser’s own 'Help' function on how to disable the function.
+                    The auto-complete feature saves previous entries you have made for Web addresses, forms, and passwords. For security protection, the auto-complete function of your browser should be disabled to avoid sensitive information is saved and displayed for the automatic completion. Please refer to your browser's own 'Help' function on how to disable the function.
         
                 <h3>Take care offline</h3>
                     Never write down your Internet banking details in a format that can be recognised by others. If you store any personal information in an electronic device, please ensure that there will be reasonable care and protection so that you are the only authorised person who can access the stored information.

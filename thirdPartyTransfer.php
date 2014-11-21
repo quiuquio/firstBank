@@ -135,7 +135,7 @@
         </tbody></table>
         <input type="text" id="#selectedPage" name="selectedPage" value="3rdPartyTransfer" hidden>
         <input type="text" id="#confirmed" name="confirmed" value="yes" hidden>
-        <button id="button" class="bigButton" type="submit" disabled>Submit</button>
+        <button id="button" class="bigButton" type="submit" title="To submit your order, please verify your identity again through our Facial recognition system."disabled>Submit Order</button>
         <label for="button" class="bigButton" id="btnLabel">(Use facial recognition to enable payment.)</label>
         <?php 
             if(isset($_POST['confirmed'])){
