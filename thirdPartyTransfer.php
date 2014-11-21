@@ -12,12 +12,19 @@
         </tr>
         <tr class="LightGrey">
             <td class="LightGrey"><font class="CONTENT">From Account:</font></td>
-            <td class="LightGrey"><font class="SELECT">
-            <select name="userFromAccount">
-                <option value="0"><?php echo '$user_account[0].number'?></option>
-                <option value="1"><?php echo '$user_account[1].number'?></option>
-                <option value="..."><?php echo '$user_account[...].number'?></option>
-            </select></font></td>
+            <td class="LightGrey"><font class="SELECT"> 
+            <select id="source" name="source">
+                <option selected="selected">----------- Please select account -----------</option>
+                <?php
+                    foreach ($_SESSION['accts'] as $value) {
+                        ?>
+                        <option value=<?php echo "'{$value['acct_no']}'"?>><?php echo "{$value['acct_no']}"?></option>
+                        <?php
+                    }
+               ?>
+            </select>
+            </font>
+            </td>
         </tr>
         <tr>
             <td class="LightGrey" colspan="2" height="25"><font class="CONTENT">To Account:</font></td>
@@ -27,34 +34,20 @@
                 <table border="0" cellspacing="0" cellpadding="0">
                         <tbody><tr>
                                 <td><font class="CONTENT">
-                                <input type="radio" name="toAccount" value="1">
-                                <font class="CONTENT">Non-registered Account </font></font></td>
+                                <font class="CONTENT">Payee Account:</font></font></td>
                         </tr>
                 </tbody></table>
                 </td>
                 <td class="LightGrey"><font class="CONTENT">
-                <input type="text" name="creditAcctInput" autocomplete="off" size="16" maxlength="16" value=""><br>
+                <input type="text" name="targetDes" autocomplete="off" size="16" maxlength="16" value=""><br>
                 (Please input number only and omit '-' and spaces)</font></td>
         </tr>
 
 
         <tr>
             <td class="LightGrey"><font class="CONTENT">Amount:</font></td>
-            <td class="LightGrey"><font class="SELECT"><select name="transferCurrency">
-                <option value="HKD">HKD</option>
-                <option value="AUD">AUD</option>
-                <option value="CAD">CAD</option>
-                <option value="CHF">CHF</option>
-                <option value="CNY">CNY</option>
-                <option value="EUR">EUR</option>
-                <option value="GBP">GBP</option>
-                <option value="IDR">IDR</option>
-                <option value="JPY">JPY</option>
-                <option value="NZD">NZD</option>
-                <option value="THB">THB</option>
-                <option value="USD">USD</option>
-                <option value="ZAR">ZAR</option>
-                </select></font> <input type="text" name="debitAmountInput" autocomplete="off" size="14" maxlength="14" value=""></td>
+            <td class="LightGrey"><font class="SELECT">
+            HK$ <input type="text" name="debitAmountInput" autocomplete="off" size="14" maxlength="14" value=""></td>
         </tr>
 
         <tr>
@@ -62,7 +55,7 @@
             <table border="0" cellspacing="0" cellpadding="0">
                     <tbody><tr>
                             <td>
-                            <input type="radio" name="transferDateOpt" value="1" checked="checked">
+                            <input type="radio" name="WhenToPay" value="1" checked="checked">
                             <font class="CONTENT">Transfer Now</font></td>
                     </tr>
             </tbody></table>
@@ -74,18 +67,14 @@
             <table border="0" cellspacing="0" cellpadding="0">
                 <tbody><tr>
                             <td>
-                            <input type="radio" name="transferDateOpt" value="0">
+                            <input type="radio" name="WhenToPay" value="0">
                             <font class="CONTENT">Transfer Date</font></td>
                     </tr>
                 </tbody>
             </table>
             </td>
             <td class="LightGrey"><font class="SELECT">
-                <select name="transferDateList">
-                    <option value="17-11-2014">17-11-2014</option>
-                    <option value="18-11-2014">18-11-2014</option>
-                    <option value="19-11-2014">19-11-2014</option>
-                    <option value="20-11-2014">20-11-2014</option>
+                <select name="effDate">
                     <option value="21-11-2014">21-11-2014</option>
                     <option value="22-11-2014">22-11-2014</option>
                     <option value="24-11-2014">24-11-2014</option>
@@ -123,10 +112,9 @@
         </tr>
         <tr>
             <td class="LightGrey" valign="top"><font class="CONTENT">Remarks:</font></td>
-            <td class="LightGrey"><input type="text" name="remark" autocomplete="off" size="40" maxlength="60" value="">
-                    <br><font class="CONTENT">
-                        (For pending transfer and template, maximum of 60 characters allowed.)
-                    </font></td>
+            <td class="LightGrey">
+            <input type="text" name="remark" autocomplete="off" size="40" maxlength="60" value="">
+            </td>
         </tr>     
         </tbody></table>
 </form>
@@ -157,3 +145,66 @@
 </tbody></table>
 </td></tr>
 </tbody></table>
+
+<?php
+var_dump($_POST);
+function confirmationPass(){
+        $posString = gen2ndPwPos();
+        $selectedIpunt = explode("-", $posString);
+        $vals = [];
+        $disables = [];
+        for($i=0; $i<8; $i++){
+            if(in_array($i, $selectedIpunt)){
+                array_push($vals, "");
+                array_push($disables, "");
+            }
+            else{
+                array_push($vals, "value='.'");
+                array_push($disables, "disabled='disabled'");
+            }
+        }
+        echo    '
+                <script type="text/javascript" src="js/jsbn.js"></script>
+                <script type="text/javascript" src="js/prng4.js"></script>
+                <script type="text/javascript" src="js/rng.js"></script>
+                <script type="text/javascript" src="js/rsa.js"></script>
+                ';
+        echo '<h2>Input Password Number Two</h2>';
+        //echo '<form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" id="" name="loginform">';
+        echo '<label for="pw2Block">Password</label> ';
+        echo '<!--<input id="login_input_password" type="password" name="user_password" required />-->';
+        echo "
+                <div id='pw2Block'>
+                <input type='password' maxlength='1' name='pw2_0' {$vals[0]} {$disables[0]}/>
+                <input type='password' maxlength='1' name='pw2_1' {$vals[1]} {$disables[1]}/>
+                <input type='password' maxlength='1' name='pw2_2' {$vals[2]} {$disables[2]}/>
+                <input type='password' maxlength='1' name='pw2_3' {$vals[3]} {$disables[3]}/>
+                <input type='password' maxlength='1' name='pw2_4' {$vals[4]} {$disables[4]}/>
+                <input type='password' maxlength='1' name='pw2_5' {$vals[5]} {$disables[5]}/>
+                <input type='password' maxlength='1' name='pw2_6' {$vals[6]} {$disables[6]}/>
+                <input type='password' maxlength='1' name='pw2_7' {$vals[7]} {$disables[7]}/>
+                </div>
+            ";
+        echo '<button id="login2Button">Log in</button>';    
+        echo '<input id="login2poss" name="posString" hidden/>';
+        echo '<input type="password" id="login2pw" name="login2pw" value="" hidden/>';
+        echo '<input type="submit" id="login2Submit" value="Log in" hidden/>';
+        //echo '</form>';
+        //showInternalPaymentInfo();
+    }
+?>
+
+<script type="text/javascript">
+    $('#login2Button').click(function(evt){
+            var login = $("#pw2Block input"); // select all buttons in menu, but only the buttons.
+            var pw = "";
+            $.each(login, function(key, value){
+                pw += value.value=='.' ? '' : value.value+"-";
+            });
+            pw = pw.substring(0, pw.length - 1);
+            var input = $("#login2pw")[0];
+            input.setAttribute('value', pw);
+            var submit = $("#confirmP")[0];
+            submit.click();
+        });
+</script>
