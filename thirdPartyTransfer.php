@@ -27,20 +27,30 @@
             </td>
         </tr>
         <tr>
+            <td class="LightGrey" height="25"><font class="CONTENT">Beneficiary name:</font></td>
+            <td class="LightGrey" height="25">
+                <input type="text" name = "beneficiaryname" />
+            </td>
+        </tr>
+        <tr>
             <td class="LightGrey" colspan="2" height="25"><font class="CONTENT">To Account:</font></td>
         </tr>
         <tr>
                 <td class="LightGrey">
                 <table border="0" cellspacing="0" cellpadding="0">
-                        <tbody><tr>
-                                <td><font class="CONTENT">
-                                <font class="CONTENT">Payee Account:</font></font></td>
+                        <tbody>
+                        <tr>
+                            <td><font class="CONTENT">
+                            <font class="CONTENT">Bank Code - Payee Account:</font></font></td>
                         </tr>
                 </tbody></table>
                 </td>
-                <td class="LightGrey"><font class="CONTENT">
+                <td class="LightGrey">
+                <font class="CONTENT"><br>                
+                <input type="text" maxlength="3" id="bankCode"/> -
                 <input type="text" name="targetDes" autocomplete="off" size="16" maxlength="16" value=""><br>
-                (Please input number only and omit '-' and spaces)</font></td>
+                (Please input number only and omit '-' and spaces.<br> For First Bank accounts the Bank Code is not required.)</font>
+                </td>
         </tr>
 
 
@@ -115,8 +125,29 @@
             <td class="LightGrey">
             <input type="text" name="remark" autocomplete="off" size="40" maxlength="60" value="">
             </td>
-        </tr>     
+        </tr>
+        <tr>
+            <td class="LightGrey" valign="top"><font class="CONTENT">Message for Recipient:</font></td>
+            <td class="LightGrey">
+            <textarea id="msg4R"></textarea>
+            </td>
+        </tr>    
         </tbody></table>
+        <input type="text" id="#selectedPage" name="selectedPage" value="3rdPartyTransfer" hidden>
+        <input type="text" id="#confirmed" name="confirmed" value="yes" hidden>                
+        <button id="button" class="bigButton" type="submit">Submit</button>
+        <?php 
+            if(isset($_POST['confirmed'])){
+                if ($_POST['WhenToPay'] == 0){
+                    echo $db->addTimedTransfer($_POST['source'], $_POST['targetDes'], "", $_POST['amount'], $_POST['effDate'], "fixed", "", 0, 1);
+                }else{
+                    echo $db->mTransfer($_POST['source'], $_POST['targetDes'], $_POST['debitAmountInput'], "", FALSE) ? "Transaction successful." : "Transcation failed.";
+                }
+            }else{
+                echo "";
+            }
+
+        ?>
 </form>
 </td>
 </tr>
