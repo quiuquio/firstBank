@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS login (
   user_name varchar(32),
   u_id int auto_increment NOT NULL,
@@ -59,8 +58,7 @@ CREATE TABLE IF NOT EXISTS transactions (
   t_interbank boolean,
   PRIMARY KEY (transaction_id),
 --  FOREIGN KEY (tt_id) REFERENCES timed_transfer,
-  FOREIGN KEY (account_1_num) REFERENCES user_acct(acct_no),
-  FOREIGN KEY (account_2_num) REFERENCES user_acct(acct_no)
+  FOREIGN KEY (account_1_num) REFERENCES user_acct(acct_no)
   ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

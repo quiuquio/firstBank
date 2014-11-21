@@ -239,7 +239,7 @@ class DB
 				$valstr .= ", '$remarks'";
 			}
 			$sqlstr = "INSERT INTO transactions ($colstr) VALUES ($valstr)";
-			//echo "<p>$sqlstr</p>";
+			echo "<p>$sqlstr</p>";
 			$result = $this->dbupdate($sqlstr);
 			$this->dbclose($con);
 			return $result;

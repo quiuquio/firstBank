@@ -33,19 +33,19 @@
                 </tr>
                 <tr class="LightGrey" valign="top">
                         <td><font class="CONTENT">Surname:</font></td>
-                        <td><font class="CONTENT"><?php echo '$user_surname'?></font></td>
+                        <td><font class="CONTENT"><?php echo "{$_SESSION['lastn']}"?></font></td>
                 </tr>
                 <tr class="LightGrey" valign="top">
                         <td><font class="CONTENT">Given Name:</font></td>
-                        <td><font class="CONTENT"><?php echo '$user_first_name'?></font></td>
+                        <td><font class="CONTENT"><?php echo "{$_SESSION['firstn']}"?></font></td>
                 </tr>
                 <tr class="LightGrey" valign="top">
-                        <td><font class="CONTENT">Date of Birth:</font></td>
-                        <td><font class="CONTENT"><?php echo '$user_DOB'?></font></td>
+                        <td><font class="CONTENT">Age:</font></td>
+                        <td><font class="CONTENT"><?php echo "{$_SESSION['age']}"?></font></td>
                 </tr>
                 <tr>
                         <td class="LightGrey"><font class="CONTENT">Residential Address:</font></td>
-                        <td class="LightGrey" valign="TOP"><?php echo '$user_residential_address'?></td>
+                        <td class="LightGrey" valign="TOP"><?php echo "{$_SESSION['addr']}"?></td>
                 </tr>
                 <tr>
 

@@ -2,12 +2,13 @@
 
 
 <div id="contentBox">
-<form>                            
+<form method="POST" action="index.php">                            
     <table border="0" cellspacing="0" cellpadding="0" width="570" class="commonForm2">
             <tbody><tr class="LightGrey">
         <td class="label" width="30%">Payee:</td>
         <td>
              <select id="payeeList">
+                <option value="">------------SELECT ACCOUNT NAME------------</option>
                 <option value="0101HOST">0101HOST</option>
                 <option value="1579">1579</option>
                 <option value="1628">1628</option>
@@ -684,7 +685,7 @@
             <td class="label">Bill Account No.:</td>
             <td >
                 <div style="width:50%">
-                <input type="text" name="BillAcct" onkeypress="return disableEnterKey(event)" autocomplete="off" size="26" maxlength="25" value="">
+                <input type="text" name="billAcc" id="bAccNum" size="26" maxlength="25" value="">
                 </div>
             </td>
         </tr>
@@ -705,16 +706,21 @@
     <td class="label">Amount:</td>
     <td >
             HKD&nbsp;
-            <input type="text" name="PaymentAmt" autocomplete="off" size="16" maxlength="16"  value="">
+            <input type="text" name="debitAmountInput" autocomplete="off" size="16" maxlength="16"  value="">
     </td>
 </tr>
 <tr class="LightGrey">
     <td class="label">Deduct From Account:</td>
     <td ><font class="SELECT"> 
-        <select name="targetDes" onfocus="setRegAcctRadioFocus()">
-            <option value="" selected="selected">----------- Please select account -----------</option>
-            <option value="0">$user_account[0].number $user_account[0].type</option>
-            <option value="1">$user_account[1].number $user_account[1].type</option>
+        <select id="source" name="source">
+                <option selected="selected">----------- Please select account -----------</option>
+                <?php
+                    foreach ($_SESSION['accts'] as $value) {
+                        ?>
+                        <option value=<?php echo "'{$value['acct_no']}'"?>><?php echo "{$value['acct_no']}"?></option>
+                        <?php
+                    }
+               ?>
         </select>
         </font>
     </td>
@@ -767,14 +773,25 @@
     </select>
     </font></td>
 </tr> 
-<tr class="LightGrey">
-    <td></td>
-    <td>
-        <input type="submit" name="payBill" value="Submit Bill Payment"/>
-    </td>
-</tr>
 </tbody>
 </table>
+<input type="text" id="#selectedPage" name="selectedPage" value="billPayment" hidden>
+<input type="text" id="#confirmed" name="confirmed" value="yes" hidden>                
+        <button id="button" class="bigButton" type="submit">Submit</button>
+        <?php 
+            if(isset($_POST['confirmed'])){
+                if ($_POST['WhenToPay'] == 0 ){
+                    echo $db->addTimedTransfer($_POST['source'], $_POST['billAcc'], "Bill Payment", $_POST['amount'], $_POST['effDate'], "fixed", "", 1, 1);                
+                }else{
+                    //echo $db->mTransfer($_POST['source'], $_POST['billAcc'], $_POST['debitAmountInput'], "Bill Payment", TRUE) ? "Transaction successful." : "Transcation failed.";
+                    echo $db->mTransfer($_POST['source'], 1234567911, 1, "testinn", TRUE) ? "Transaction successful." : "Transcation failed.";        
+                }
+            }else{
+                echo "";
+            }
+
+        ?>
+
 </form>
 </div>
 <!-- importantNotes -->
@@ -784,7 +801,7 @@
         <li>Once an instant payment instruction is submitted, no amendment or cancellation is allowed, regardless of the instruction's processing status.</li>
         <li>To avoid any penalty fees  to be charged  by your merchant (if applicable) , you are suggested to pay the bill 1-2 working days before the due date that is shown on the e-bill.</li>
         <li>For online bill payment with credit card, the payment must be used to settle wholly or partially an underlying genuine debt due to the payee (the "Debt"). The Cardholder is required to provide evidence
-        thereof if so requested by First Bank. Hang Seng reserves the right to decline generating Cash Dollars, or to cancel the Cash Dollars generated, for any payment which Hang Seng suspects not be used to settle
+        thereof if so requested by First Bank. First Bank reserves the right to decline generating Cash Dollars, or to cancel the Cash Dollars generated, for any payment which Hang Seng suspects not be used to settle
         the Debt. 
         </li>
     </ol>
@@ -792,3 +809,73 @@
         </div> <!--/ content middle -->
         <div id="contentBox-bottom"></div>
 </div>
+
+<script type="text/javascript">
+    $("#payeeList").change(function(evt){ 
+      $("#bAccNum")[0].setAttribute("value", Math.floor(Math.random() * 100000000000));
+      console.log(evt);
+    });
+</script>
+
+<?php
+var_dump($_POST);
+function confirmationPass(){
+        $posString = gen2ndPwPos();
+        $selectedIpunt = explode("-", $posString);
+        $vals = [];
+        $disables = [];
+        for($i=0; $i<8; $i++){
+            if(in_array($i, $selectedIpunt)){
+                array_push($vals, "");
+                array_push($disables, "");
+            }
+            else{
+                array_push($vals, "value='.'");
+                array_push($disables, "disabled='disabled'");
+            }
+        }
+        echo    '
+                <script type="text/javascript" src="js/jsbn.js"></script>
+                <script type="text/javascript" src="js/prng4.js"></script>
+                <script type="text/javascript" src="js/rng.js"></script>
+                <script type="text/javascript" src="js/rsa.js"></script>
+                ';
+        echo '<h2>Input Password Number Two</h2>';
+        //echo '<form method="POST" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '" id="" name="loginform">';
+        echo '<label for="pw2Block">Password</label> ';
+        echo '<!--<input id="login_input_password" type="password" name="user_password" required />-->';
+        echo "
+                <div id='pw2Block'>
+                <input type='password' maxlength='1' name='pw2_0' {$vals[0]} {$disables[0]}/>
+                <input type='password' maxlength='1' name='pw2_1' {$vals[1]} {$disables[1]}/>
+                <input type='password' maxlength='1' name='pw2_2' {$vals[2]} {$disables[2]}/>
+                <input type='password' maxlength='1' name='pw2_3' {$vals[3]} {$disables[3]}/>
+                <input type='password' maxlength='1' name='pw2_4' {$vals[4]} {$disables[4]}/>
+                <input type='password' maxlength='1' name='pw2_5' {$vals[5]} {$disables[5]}/>
+                <input type='password' maxlength='1' name='pw2_6' {$vals[6]} {$disables[6]}/>
+                <input type='password' maxlength='1' name='pw2_7' {$vals[7]} {$disables[7]}/>
+                </div>
+            ";
+        echo '<button id="login2Button">Log in</button>';    
+        echo '<input id="login2poss" name="posString" hidden/>';
+        echo '<input type="password" id="login2pw" name="login2pw" value="" hidden/>';
+        echo '<input type="submit" id="login2Submit" value="Log in" hidden/>';
+        //echo '</form>';
+        //showInternalPaymentInfo();
+    }
+?>
+
+<script type="text/javascript">
+    $('#login2Button').click(function(evt){
+            var login = $("#pw2Block input"); // select all buttons in menu, but only the buttons.
+            var pw = "";
+            $.each(login, function(key, value){
+                pw += value.value=='.' ? '' : value.value+"-";
+            });
+            pw = pw.substring(0, pw.length - 1);
+            var input = $("#login2pw")[0];
+            input.setAttribute('value', pw);
+            var submit = $("#confirmP")[0];
+            submit.click();
+        });
+</script>
