@@ -118,9 +118,9 @@
     <?php 
         if(isset($_POST['confirmed'])){
             if ($_POST['WhenToPay'] == 0){
-                echo $db->addTimedTransfer($_POST['source'], $_POST['targetDes'], "", $_POST['amount'], $_POST['effDate'], "fixed", "", 1, 1);
+                echo $db->addTimedTransfer($_POST['source'], $_POST['targetDes'], "", $_POST['amount'], $_POST['effDate'], "fixed", "", 0, 1);
             }else{
-                echo $db->mTransfer($_POST['source'], $_POST['targetDes'], $_POST['amount'], "", TRUE) ? "Transaction successful." : "Transcation failed.";
+                echo $db->mTransfer($_POST['source'], $_POST['targetDes'], $_POST['amount'], "", FALSE) ? "Transaction successful." : "Transcation failed.";
             }
         }else{
             echo "";

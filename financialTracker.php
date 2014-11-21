@@ -26,6 +26,7 @@ new TradingView.widget({
 });
 </script>
 <!-- TradingView Widget END -->
+<div class="stdBox">
 <p>
   In the market tracker function, you can see a S&amp;p500 stock trend (the default display) there are 
   many small function buttons to help customers analyze the stock in the page, Time Interval which can be
@@ -37,3 +38,4 @@ new TradingView.widget({
   analysis. If customers want to know more information, you can jump to the bottom right corner of the
 official website of the buttons
 </p>
+</div>
