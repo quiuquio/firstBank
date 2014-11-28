@@ -4192,5 +4192,14 @@ new TradingView.MiniWidget({
     </tbody></table>
 </form>
 
+<?php
+require_once('htdocs/firstBank/db.php');
+$db = new DB();
+$db->checkTransactions();
+$db->performTTransfer();
+
+?>
+
+
 /*****end of relevant php/html files*******/
 
